@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="认识易得康——专注于居家医疗照护与长期护理服务的专业品牌。">
+  <link rel="icon" href="site/public/favicon.svg">
+  <title>认识易得康｜易得康医疗</title>
+  <script>
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    document.documentElement.classList.add("page-restoring");
+    addEventListener("pageshow", () => {
+      scrollTo(0, 0);
+      requestAnimationFrame(() => document.documentElement.classList.remove("page-restoring"));
+    });
+  </script>
+  <style>
+    :root{
+      --blue:#12b6f1;
+      --ink:#29282b;
+      --body:#040708;
+      --navy:#1f2a3a;
+      --line:#d9dfe3;
+      --content:min(66.6667vw,1700px);
+      --asset:"网站切图/认识易得康/figma/";
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:#fff}
+    html.page-restoring body{visibility:hidden}
+    body{margin:0;overflow-x:hidden;color:var(--body);font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
+    img{display:block;max-width:100%}
+    a{color:inherit}
+    button{font:inherit}
+    .content{width:var(--content);margin-inline:auto}
+    .kicker{margin:0 0 .55em;color:var(--blue);font-size:clamp(15px,1.0417vw,20px);line-height:1.5;font-weight:500}
+    .heading{margin:0;color:var(--ink);font-size:clamp(34px,2.5vw,52px);line-height:1.2;letter-spacing:-.035em;font-weight:500}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .8s cubic-bezier(.22,1,.36,1)}
+    .reveal.is-visible{opacity:1;transform:none}
+
+    .site-header{position:fixed;inset:0 0 auto;z-index:100;height:7.5vw;max-height:144px;line-height:0}
+    .site-header>img{width:100%;height:100%;object-fit:fill}
+    .nav-hit{position:absolute;top:0;height:100%;z-index:2;text-indent:-9999px;overflow:hidden}
+    .nav-logo{left:8.33%;width:10.42%}
+    .nav-about{left:29.17%;width:7.25%}
+    .nav-service{left:36.25%;width:7.1%}
+    .nav-solutions{left:43.7%;width:8.2%}
+    .nav-talent{left:52.2%;width:7.8%}
+    .nav-news{left:60.4%;width:6.6%}
+    .nav-join{left:67.1%;width:6.4%}
+    .nav-phone{left:78.5%;width:8.4%}
+    .nav-contact{left:86.15%;width:6.2%}
+    .nav-hit:focus-visible{outline:2px solid var(--blue);outline-offset:-3px}
+
+    .hero{position:relative;height:56.25vw;max-height:1080px;overflow:hidden;color:#fff;background:#111}
+    .hero-bg{position:absolute;inset:0;background-image:url("网站切图/认识易得康/figma/hero.jpg");background-size:auto 100%;background-position:45.5% center;background-repeat:no-repeat;transform:scale(1.002)}
+    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
+    .hero-copy{position:relative;z-index:2;padding-top:21.4vw}
+    .hero h1{width:68.45%;margin:0;font-size:clamp(54px,5vw,100px);line-height:1.1;letter-spacing:-.01em;font-weight:500}
+    .hero p{margin:1.2em 0 0;width:45.31%;font-size:clamp(17px,1.25vw,25px);line-height:1.5;font-weight:400}
+
+    .industry{height:31.875vw;max-height:612px;background:#fff;display:flex;align-items:center}
+    .industry-grid{display:grid;grid-template-columns:48% 45%;justify-content:space-between;align-items:start}
+    .industry-copy{font-size:clamp(15px,1.0417vw,20px);line-height:1.5;color:#29282b}
+    .industry-copy p{margin:0}
+    .industry-copy p+p{margin-top:1.35em}
+    .industry-copy strong{display:block;font-weight:500}
+
+    .care-scene{height:31.77vw;max-height:610px;background:url("网站切图/认识易得康/figma/care-scene.png") center center/cover no-repeat}
+
+    .belief{height:23.958vw;max-height:460px;background:var(--blue);color:#fff;display:flex;align-items:center}
+    .belief .kicker,.belief .heading{color:#fff}
+    .belief-grid{display:block}
+    .belief-grid>div:first-child{width:49.15%}
+    .belief-copy{width:49.15%;margin-top:1.35em;font-size:clamp(15px,1.0417vw,20px);line-height:1.5}
+    .belief-copy p{margin:0}
+
+    .about{height:42.188vw;max-height:810px;background:#fff;position:relative}
+    .about .content{height:100%;position:relative}
+    .about-copy{position:absolute;left:0;top:13.6%;width:49.15%}
+    .about-text{margin-top:2.1em;font-size:clamp(15px,1.0417vw,20px);line-height:1.5}
+    .about-text p{margin:0}
+    .about-text p+p{margin-top:1.5em}
+    .about-image{position:absolute;right:0;bottom:14.6%;width:42.74%;height:40.74%;object-fit:cover}
+
+    .scale{height:40.52vw;max-height:778px;margin-top:-.1042vw;background:var(--blue);color:#fff;padding-top:4.9vw}
+    .scale .heading{color:#fff}
+    .scale-note{margin:.8em 0 0;font-size:clamp(13px,1.0417vw,20px);line-height:1.5}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);row-gap:4.9vw;margin-top:4vw}
+    .metric{text-align:center}
+    .metric-number{display:flex;justify-content:center;align-items:flex-start;line-height:.95;white-space:nowrap;font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-size:clamp(58px,5vw,100px);font-weight:400;letter-spacing:-.05em}
+    .metric-number small{font-size:.666em;line-height:1.12;letter-spacing:0;margin-left:.12em}
+    .metric-label{display:block;margin-top:.65em;font-size:clamp(16px,1.25vw,25px);line-height:1.35}
+
+    .network{height:58.438vw;max-height:1122px;position:relative;background:#edf7fd;overflow:hidden}
+    .network-bg{position:absolute;left:0;top:0;width:104.271%;max-width:none;height:100%;object-fit:fill}
+    .network-title{position:relative;z-index:2;padding-top:5.85vw}
+    .network-node{position:absolute;z-index:3;border-radius:50%;background:var(--blue);box-shadow:0 0 0 0 rgba(18,182,241,.2);animation:networkPulse 2.8s ease-in-out infinite}
+    .network-node.node-a{left:62.34%;top:47.5%;width:clamp(16px,1.458vw,28px);height:clamp(16px,1.458vw,28px)}
+    .network-node.node-b{left:62.34%;top:55.7%;width:clamp(7px,.625vw,12px);height:clamp(7px,.625vw,12px);animation-delay:.5s}
+    .network-node.node-c{left:57.55%;top:52.05%;width:clamp(6px,.521vw,10px);height:clamp(6px,.521vw,10px);animation-delay:1s}
+    .network-node.node-d{left:70.26%;top:42.6%;width:clamp(8px,.729vw,14px);height:clamp(8px,.729vw,14px);animation-delay:1.5s}
+    @keyframes networkPulse{0%,100%{box-shadow:0 0 0 0 rgba(18,182,241,.22)}50%{box-shadow:0 0 0 8px rgba(18,182,241,0)}}
+
+    .matrix{height:87.656vw;max-height:1683px;position:relative;overflow:hidden;color:#fff;background:#1f2a3a}
+    .matrix::before{content:"";position:absolute;inset:0;background:url("网站切图/认识易得康/figma/brand-matrix-bg.jpg") center/100% 100% no-repeat}
+    .matrix::after{content:"";position:absolute;inset:0;background:rgba(31,42,58,.7)}
+    .matrix-title{position:relative;z-index:2;padding-top:6.98vw}
+    .matrix-title .kicker,.matrix-title .heading{color:#fff}
+    .matrix-panel{position:relative;z-index:2;width:var(--content);margin:5.78vw auto 0;border-radius:clamp(14px,1.67vw,32px);box-shadow:0 24px 70px rgba(0,0,0,.08)}
+
+    .history{height:156.771vw;max-height:3010px;padding:8.6vw 0 7.1vw;background:#fff}
+    .history-list{margin-top:7.5vw;border-top:1px solid var(--line)}
+    .history-row{display:grid;grid-template-columns:14.5% 26% 1fr 100px;column-gap:2.4%;align-items:start;padding:1.55vw 0;border-bottom:1px solid var(--line);transition:background-color .28s,padding .28s}
+    .history-row.reveal{opacity:1;transform:none}
+    .history-row:hover{background:#f7fbfd;padding-left:12px;padding-right:12px}
+    .history-row:first-child .history-year,.history-row:first-child .history-name,.history-row:hover .history-year,.history-row:hover .history-name{color:var(--blue)}
+    .history-year,.history-name{font-size:clamp(19px,1.25vw,24px);line-height:1.4;font-weight:500}
+    .history-year::after{content:"年"}
+    .history-description{font-size:clamp(12px,.729vw,14px);line-height:1.5;white-space:pre-line;color:#272c31}
+    .history-image{width:100px;height:100px;object-fit:cover;justify-self:end}
+
+    .advantages{height:58.438vw;max-height:1122px;padding:0 0 5.625vw;background:#fff}
+    .advantages-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.45vw;margin-top:5vw}
+    .advantage-card{height:13.438vw;max-height:258px;display:grid;grid-template-columns:1fr 27%;align-items:center;overflow:hidden;background:#f5f6f7;border:1px solid #eef0f2;transition:transform .38s cubic-bezier(.22,1,.36,1),box-shadow .38s}
+    .advantage-card:hover{transform:translateY(-5px);box-shadow:0 20px 46px rgba(25,47,65,.1)}
+    .advantage-copy{padding:1.7vw 1.5vw 1.7vw 1.7vw}
+    .advantage-copy h3{margin:0 0 .55em;font-size:clamp(24px,1.875vw,38px);line-height:1.25;font-weight:500}
+    .advantage-copy p{margin:0;font-size:clamp(12px,.729vw,14px);line-height:1.5}
+    .advantage-card img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.22,1,.36,1)}
+    .advantage-card:hover img{transform:scale(1.035)}
+
+    .responsibility{height:40.208vw;max-height:772px;padding:2.9vw 0 2.9vw;background:#fff}
+    .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25vw;margin-top:2.9vw}
+    .news-card{transition:transform .35s cubic-bezier(.22,1,.36,1)}
+    .news-card:hover{transform:translateY(-6px)}
+    .news-card img{width:100%;aspect-ratio:410.667/273.553;object-fit:cover}
+    .news-copy{padding:1.25vw 1.25vw 0}
+    .news-copy h3{margin:0 0 .28em;font-size:clamp(21px,1.458vw,30px);line-height:1.28;font-weight:500}
+    .news-copy p{margin:0;font-size:clamp(13px,.833vw,16px);line-height:1.5}
+    .news-more{display:inline-block;margin-top:.55em;color:#111;text-decoration:none;font-size:clamp(13px,.833vw,16px)}
+    .news-more::after{content:" →";color:var(--blue)}
+    .all-news{display:flex;justify-content:center;margin-top:2.9vw}
+    .all-news a{display:inline-flex;align-items:center;justify-content:center;min-width:112px;height:44px;border:1px solid #9aa6ae;border-radius:4px;text-decoration:none;font-size:16px;transition:.25s}
+    .all-news a:hover{color:#fff;background:var(--blue);border-color:var(--blue)}
+
+    .site-footer{line-height:0;background:#1f2a3a}
+    .site-footer img{width:100%;height:auto}
+    .page-tail{height:10.625vw;max-height:204px;background:#fff}
+    .to-top{position:fixed;right:28px;bottom:28px;z-index:90;width:46px;height:46px;border:0;border-radius:50%;background:var(--blue);color:#fff;font-size:20px;box-shadow:0 12px 30px rgba(0,142,199,.28);cursor:pointer;opacity:0;transform:translateY(12px);transition:.28s}
+    .to-top.is-visible{opacity:1;transform:none}
+
+    @media (min-width:2200px){
+      .hero-copy{padding-top:min(21.4vw,470px)}
+      .scale{padding-top:min(4.9vw,108px)}
+      .network-title{padding-top:min(5.85vw,128px)}
+      .matrix-title{padding-top:min(6.98vw,153px)}
+      .matrix-panel{margin-top:min(5.78vw,127px)}
+    }
+    @media (max-width:1180px){
+      :root{--content:calc(100vw - 64px)}
+      .site-header{height:88px;max-height:none;overflow:hidden;background:#020808}
+      .site-header>img{width:148%;max-width:none;transform:translateX(-7%);object-fit:fill}
+      .nav-hit:not(.nav-logo):not(.nav-contact){display:none}
+      .nav-logo{left:3%;width:29%}.nav-contact{left:auto;right:4%;width:18%}
+      .hero{height:720px;min-height:720px}
+      .hero-bg{background-position:47% center}
+      .hero-copy{padding-top:260px}
+      .hero h1{width:78%}.hero p{width:58%}
+      .industry,.belief,.about,.scale,.network,.matrix{height:auto;max-height:none}
+      .industry{min-height:560px;padding:92px 0}
+      .belief{min-height:400px;padding:72px 0}
+      .about{min-height:760px;padding:86px 0}
+      .about .content{display:grid;grid-template-columns:1fr 42%;gap:42px;align-items:center}
+      .about-copy,.about-image{position:static;width:100%;height:auto}
+      .about-image{aspect-ratio:547/330;align-self:end;margin-bottom:54px}
+      .scale{min-height:680px;padding:80px 0}
+      .metric-grid{margin-top:60px;row-gap:62px}
+      .network{min-height:680px}.network-title{padding-top:70px}
+      .matrix{min-height:1050px;padding:96px 0}
+      .matrix-title{padding-top:0}.matrix-panel{margin-top:70px}
+      .history{height:auto;max-height:none;padding:100px 0 90px}.history-list{margin-top:75px}
+      .history-row{grid-template-columns:100px 220px 1fr 88px;column-gap:22px;padding:24px 0}
+      .history-image{width:88px;height:88px}
+      .advantages{height:auto;max-height:none;padding:80px 0}.advantages-grid{gap:18px;margin-top:56px}
+      .advantage-card{height:230px;min-height:230px}.advantage-copy{padding:26px}
+      .responsibility{height:auto;max-height:none;padding:68px 0}.news-grid{gap:18px;margin-top:46px}.news-copy{padding:20px 20px 0}
+    }
+    @media (max-width:760px){
+      :root{--content:calc(100vw - 40px)}
+      .site-header{height:72px}.site-header>img{width:184%;transform:translateX(-8.5%)}
+      .hero{height:720px}.hero-copy{padding-top:250px}.hero h1,.hero p{width:100%}.hero h1{font-size:46px}.hero p{font-size:16px}
+      .industry{padding:76px 0}.industry-grid{grid-template-columns:1fr;gap:38px}
+      .care-scene{height:390px;background-position:58% center}
+      .belief{padding:72px 0}.belief-grid>div:first-child,.belief-copy{width:100%}.belief-copy{margin-top:32px}
+      .about{padding:72px 0}.about .content{display:block}.about-image{margin:42px 0 0;width:100%}
+      .scale{padding:68px 0;min-height:auto}.metric-grid{grid-template-columns:repeat(2,1fr);row-gap:50px}.metric:nth-child(3){display:none}
+      .network{min-height:560px}.network-bg{object-position:center}.network-title{padding-top:60px}
+      .matrix{min-height:auto;padding:74px 0}.matrix-panel{width:calc(100vw - 24px);margin-top:48px;border-radius:14px}
+      .history{padding:76px 0}.history-list{margin-top:54px}.history-row{grid-template-columns:74px 1fr 72px;gap:12px;padding:24px 0}.history-description{grid-column:2/-1;margin-top:12px}.history-image{grid-column:3;grid-row:1;width:72px;height:72px}
+      .advantages{padding:72px 0}.advantages-grid{grid-template-columns:1fr;gap:14px;margin-top:46px}.advantage-card{height:220px}.advantage-copy{padding:22px}.advantage-copy h3{font-size:25px}
+      .responsibility{padding:68px 0}.news-grid{grid-template-columns:1fr}.news-card{margin-bottom:28px}.news-copy{padding:18px 0 0}.all-news{margin-top:20px}
+      .site-footer{overflow:hidden}.site-footer img{width:170%;max-width:none;transform:translateX(-7%)}
+      .to-top{right:16px;bottom:18px;width:42px;height:42px}
+    }
+    @media (max-width:440px){
+      .metric:nth-child(3){display:block}.metric-number{font-size:52px}
+      .about{min-height:auto}.history-row{grid-template-columns:64px 1fr}.history-name{padding-right:0}.history-image{display:none}.history-description{grid-column:2}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="主导航">
+    <img src="网站切图/认识易得康/figma/header.png" alt="易得康导航">
+    <a class="nav-hit nav-logo" href="易得康官网.html">易得康首页</a>
+    <a class="nav-hit nav-about" href="#about">关于我们</a>
+    <a class="nav-hit nav-service" href="#scale">我们的服务</a>
+    <a class="nav-hit nav-solutions" href="#matrix">场景解决方案</a>
+    <a class="nav-hit nav-talent" href="#advantages">专业护理人才</a>
+    <a class="nav-hit nav-news" href="#responsibility">公司动态</a>
+    <a class="nav-hit nav-join" href="#footer">加入我们</a>
+    <a class="nav-hit nav-phone" href="tel:400-921-5121">400-921-5121</a>
+    <a class="nav-hit nav-contact" href="#footer">联系我们</a>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="content hero-copy reveal">
+        <h1>把专业医疗照护能力带入更多中国家庭</h1>
+        <p>不只是把服务送上门，而是把医疗标准、专业人才、质量管理和长期陪伴，转化为更多家庭真正用得上、靠得住的照护体系。</p>
+      </div>
+    </section>
+
+    <section class="industry">
+      <div class="content industry-grid reveal">
+        <div>
+          <p class="kicker">行业视角</p>
+          <h2 class="heading">中国家庭照护正在被<br>重新定义</h2>
+        </div>
+        <div class="industry-copy">
+          <p><strong>人口结构变化</strong>2025年末，中国60岁及以上人口达3.2338亿，占全国人口23.0%，长期照护正在成为社会长期议题。</p>
+          <p><strong>照护需求升级</strong>失能、慢病、术后康复与认知障碍等复合需求，推动家庭照护走向医、养、康、护融合。</p>
+          <p><strong>制度体系成形</strong>长护险、基层医疗延伸与“互联网+护理服务”，正在推动居家照护走向可评估、可支付、可监管。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="care-scene" aria-label="居家医疗照护场景"></section>
+
+    <section class="belief">
+      <div class="content belief-grid reveal">
+        <div>
+          <p class="kicker">品牌理念</p>
+          <h2 class="heading">易得康致力于把专业医疗照护能力带入更多中国家庭</h2>
+        </div>
+        <div class="belief-copy">
+          <p>不只是把服务送上门，而是把医疗标准、专业人才、质量管理和长期陪伴，转化为更多家庭真正用得上、靠得住的照护体系。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="content">
+        <div class="about-copy reveal">
+          <p class="kicker">关于我们</p>
+          <h2 class="heading">专注于居家医疗照护与<br>长期护理服务的专业品牌</h2>
+          <div class="about-text">
+            <p>易得康医疗成立于2016年，是新风天域集团旗下专注于居家医疗照护与长期护理服务的专业品牌，持续回应中国家庭在老龄化、少子化与健康管理升级背景下不断增长的照护需求。</p>
+            <p>依托集团医疗资源、专业管理体系与全国服务网络，易得康构建覆盖生活照护、医疗护理、母婴护理、专业培训与数字化监管的分层服务体系，连接家庭、医疗、保险、机构与公共服务场景。</p>
+            <p>从长期护理保险到居家医疗照护，从母婴护理到照护人才培养，易得康致力于推动专业照护走进更多家庭，构建更可及、更规范、更有温度的全生命周期医疗照护服务生态。</p>
+          </div>
+        </div>
+        <img class="about-image reveal" src="网站切图/认识易得康/figma/about-storefront.png" alt="易得康照护服务中心">
+      </div>
+    </section>
+
+    <section class="scale" id="scale">
+      <div class="content">
+        <h2 class="heading reveal">服务规模</h2>
+        <p class="scale-note reveal">*数据截至2026/06，覆盖直辖市、地级市及海南省县级行政区。</p>
+        <div class="metric-grid">
+          <div class="metric"><div class="metric-number"><span data-value="73">0</span></div><span class="metric-label">业务网络覆盖城市</span></div>
+          <div class="metric"><div class="metric-number"><span data-value="380">0</span><small>+</small></div><span class="metric-label">服务站点</span></div>
+          <div class="metric"><div class="metric-number"><span data-value="450">0</span><small>K+</small></div><span class="metric-label">累计服务客户</span></div>
+          <div class="metric"><div class="metric-number"><span data-value="12">0</span><small>K+</small></div><span class="metric-label">在职护理人员</span></div>
+          <div class="metric"><div class="metric-number"><span data-value="40">0</span><small>M+</small></div><span class="metric-label">累计服务频次</span></div>
+          <div class="metric"><div class="metric-number"><span data-value="45">0</span><small>K+</small></div><span class="metric-label">母婴服务家庭</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="network">
+      <img class="network-bg" src="网站切图/认识易得康/figma/network-map.png" alt="易得康全国服务网络">
+      <span class="network-node node-a" aria-hidden="true"></span><span class="network-node node-b" aria-hidden="true"></span><span class="network-node node-c" aria-hidden="true"></span><span class="network-node node-d" aria-hidden="true"></span>
+      <div class="content network-title reveal">
+        <p class="kicker">易得康</p>
+        <h2 class="heading">全国服务网络</h2>
+      </div>
+    </section>
+
+    <section class="matrix" id="matrix">
+      <div class="content matrix-title reveal">
+        <p class="kicker">品牌矩阵</p>
+        <h2 class="heading">品牌矩阵</h2>
+      </div>
+      <img class="matrix-panel reveal" src="网站切图/认识易得康/figma/brand-matrix-panel.png" alt="新风天域与易得康品牌服务矩阵">
+    </section>
+
+    <section class="history" id="history">
+      <div class="content">
+        <div class="reveal">
+          <p class="kicker">发展历程</p>
+          <h2 class="heading">品牌发展历程</h2>
+        </div>
+        <div class="history-list">
+          <article class="history-row reveal"><div class="history-year">2016</div><div class="history-name">启航：开启先行探索</div><div class="history-description">易得康在上海创立
+顺应长护险试点启动背景，率先布局居家医疗照护服务，成为居家照护模式探索的先行力量</div><img class="history-image" src="网站切图/认识易得康/figma/history-2016.jpg" alt="2016 易得康在上海创立"></article>
+          <article class="history-row reveal"><div class="history-year">2017</div><div class="history-name">扎根：上海首站落地</div><div class="history-description">徐汇护理站成立
+首家护理站落地，标志着易得康从服务探索走向实体运营，以上海为起点构建居家照护服务网络
+
+获批上海长护险定点服务资质，正式进入长护险制度服务体系
+
+浦东新区护理培训中心成立，从服务供给延伸至人才培养，为标准化照护队伍建设奠定基础</div><img class="history-image" src="网站切图/认识易得康/figma/history-2017.png" alt="2017 徐汇护理站成立"></article>
+          <article class="history-row reveal"><div class="history-year">2018</div><div class="history-name">拓局：迈向跨区探索</div><div class="history-description">布局广州，设立居家护理机构
+将上海成熟服务经验向华南区域延展，探索跨城市属地化运营路径，推动易得康服务模式迈向可复制拓展阶段
+
+与社区卫生服务中心签约
+推动居家照护与基层医疗资源协同，初步形成“医疗+护理+社区”服务连接能力，共建社区医养结合服务体系</div><img class="history-image" src="网站切图/认识易得康/figma/history-2018.png" alt="2018 布局广州"></article>
+          <article class="history-row reveal"><div class="history-year">2019</div><div class="history-name">深耕：打造区域优势</div><div class="history-description">率先实现上海中心城区全覆盖
+居家护理服务覆盖上海核心区域，形成城市深耕服务能力，打造具备跨区域复制能力的标准化运营体系
+
+覆盖城市10+，服务站点40+，标志易得康跨区域服务承接能力逐步形成
+
+布局长三角、西南、北京市场，重点区域拓展成效显著</div><img class="history-image" src="网站切图/认识易得康/figma/history-2019.png" alt="2019 打造区域优势"></article>
+          <article class="history-row reveal"><div class="history-year">2020</div><div class="history-name">沉淀：服务口碑立信</div><div class="history-description">全国覆盖城市超20+，服务站点70+
+响应长护险第二批试点扩围政策，易得康加快城市布局，夯实跨区域属地化运营能力
+
+接待人大、医保等领导参访百余次，服务实践获得各地政府认可
+
+收获锦旗千余面、感谢信数万封，专业、优质的服务赢得业界良好口碑</div><img class="history-image" src="网站切图/认识易得康/figma/history-2020.png" alt="2020 服务口碑立信"></article>
+          <article class="history-row reveal"><div class="history-year">2021</div><div class="history-name">领航：加速全国布局</div><div class="history-description">全国覆盖城市超30+，服务站点快速增至170+
+乘势第二批长护险试点城市落地红利，易得康全国战略布局全面提速，拓城能力引领行业
+
+成为上海东郊护理专业委员会副主任委员单位，参与行业专业共建，推动护理服务规范化发展
+
+获《新民晚报》等多家主流媒体与官方报道，行业影响力与曝光度持续提升</div><img class="history-image" src="网站切图/认识易得康/figma/history-2021.png" alt="2021 加速全国布局"></article>
+          <article class="history-row reveal"><div class="history-year">2022</div><div class="history-name">育才：筑牢人才基石</div><div class="history-description">玟胜国际专业护理培训品牌成立
+依托集团“研—教—就业”一体化能力，赋能易得康专业照护人才建设
+
+与上海医院签订战略合作协议，围绕居家医疗护理新模式，强化院内院外协同，推动照护服务向专业医疗延伸
+
+同年新增辽宁盘锦等多个服务站点，服务网络向东北地区延展</div><img class="history-image" src="网站切图/认识易得康/figma/history-2022.png" alt="2022 筑牢人才基石"></article>
+          <article class="history-row reveal"><div class="history-year">2023</div><div class="history-name">拓新：链接商保生态</div><div class="history-description">加入中国平安居家养老互联体
+从长护险服务向商保支付与养老生态延伸，打开多元支付和服务合作新场景
+
+荣登央视CCTV《新闻联播》，进一步提升易得康品牌公信力与社会认知
+
+获得上海长护险百佳机构等多项荣誉，持续发挥在长护险服务领域的标杆引领作用</div><img class="history-image" src="网站切图/认识易得康/figma/history-2023.png" alt="2023 链接商保生态"></article>
+          <article class="history-row reveal"><div class="history-year">2024</div><div class="history-name">发声：提升行业影响</div><div class="history-description">亮相上海国际养老、辅具及康复医疗博览会
+在行业标杆展会集中展示易得康居家照护服务新范式，吸引领导嘉宾、媒体及专业观众多方关注，成为展会现场一大亮点
+
+受邀出席陆家嘴峰会等核心行业大会，为行业协同发展与服务模式创新贡献实践经验
+
+接待世卫组织、国际专家调研参访，为中国长护险试点经验交流提供一线参考</div><img class="history-image" src="网站切图/认识易得康/figma/history-2024.png" alt="2024 提升行业影响"></article>
+          <article class="history-row reveal"><div class="history-year">2025</div><div class="history-name">融合：探索数智跨境</div><div class="history-description">深度参与全国长期护理保险高质量发展大会
+作为长护险服务机构标杆企业参与行业关键议题交流并签署自律倡议，为行业规范化与高质量发展贡献力量
+
+推出YDCare肿瘤居家医疗护理服务，推动居家医疗照护从基础照护走向精细化、专病化、数智化服务
+
+亮相第十一届沪港大都市发展研讨会，作为行业代表进行“沪港两地居家医疗护理跨境创新实践”项目签约，探索居家医疗护理跨区域协同新模式</div><img class="history-image" src="网站切图/认识易得康/figma/history-2025.png" alt="2025 探索数智跨境"></article>
+          <article class="history-row reveal"><div class="history-year">2026</div><div class="history-name">应势：数智提质扩容</div><div class="history-description"></div><img class="history-image" src="网站切图/认识易得康/figma/history-2026.png" alt="2026 数智提质扩容"></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="advantages" id="advantages">
+      <div class="content">
+        <div class="reveal"><p class="kicker">能力优势</p><h2 class="heading">我们的能力优势</h2></div>
+        <div class="advantages-grid">
+          <article class="advantage-card reveal"><div class="advantage-copy"><h3>医疗生态协同</h3><p>依托新风天域集团医疗生态，连接临床护理、康复医疗、居家医疗与长期照护资源，将医疗机构的专业能力持续延伸至家庭场景，为居家照护服务提供清晰、稳定的专业来源。</p></div><img src="网站切图/认识易得康/figma/advantage-medical.jpg" alt="医疗生态协同"></article>
+          <article class="advantage-card reveal"><div class="advantage-copy"><h3>全国属地网络</h3><p>依托覆盖全国多城市、多站点的服务网络，易得康在不同政策环境、人群结构、地理条件与文化习惯中沉淀运营经验，形成可规模复制、又能因地制宜的属地化交付能力。</p></div><img src="网站切图/认识易得康/figma/advantage-network.jpg" alt="全国属地网络"></article>
+          <article class="advantage-card reveal"><div class="advantage-copy"><h3>家庭场景适配</h3><p>家庭环境不同于医院和机构，易得康将院内护理标准、国际化护理经验与长护险服务规范，转化为适配居家场景的评估流程、服务边界、操作规范与风险处理方案。</p></div><img src="网站切图/认识易得康/figma/advantage-home.png" alt="家庭场景适配"></article>
+          <article class="advantage-card reveal"><div class="advantage-copy"><h3>全程质量管理</h3><p>围绕服务前评估、服务中执行、服务后回访与整改，易得康建立多层级质控机制，并通过培训、抽检、互查、回访和持续改进，保障跨区域服务的一致性与可追溯性。</p></div><img src="网站切图/认识易得康/figma/advantage-quality.jpg" alt="全程质量管理"></article>
+          <article class="advantage-card reveal"><div class="advantage-copy"><h3>数智监管体系</h3><p>依托 CareLinx 等数字化系统，易得康实现服务派单、上门打卡、服务记录、视频飞检、回访评价与异常整改的全过程留痕，提升服务监管效率与质量管理透明度。</p></div><img src="网站切图/认识易得康/figma/advantage-digital.jpg" alt="数智监管体系"></article>
+          <article class="advantage-card reveal"><div class="advantage-copy"><h3>专业人才培养</h3><p>依托玟胜国际培训体系与一线服务场景，易得康持续培养护理员、长期照护师、护士、康复治疗师、营养师、母婴护理师等复合型人才，支撑专业照护稳定供给。</p></div><img src="网站切图/认识易得康/figma/advantage-talent.jpg" alt="专业人才培养"></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="responsibility" id="responsibility">
+      <div class="content">
+        <h2 class="heading reveal">社会责任与行业共建</h2>
+        <div class="news-grid">
+          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-main.png" alt="长期护理保险高质量发展大会"><div class="news-copy"><h3>长护险高质量发展大会</h3><p>2025年全国长期护理保险高质量发展大会成功召开，新风天域旗下易得康受邀深度参与。</p><a class="news-more" href="#">查看更多</a></div></article>
+          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-placeholder.png" alt="2026有光长护险服务者盛典"><div class="news-copy"><h3>2026有光长护险服务者盛典</h3><p>聚光成塔，向光而行｜2026年度易得康·有光长护服务者盛典圆满闭幕。</p><a class="news-more" href="#">查看更多</a></div></article>
+          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-placeholder.png" alt="长期护理保险高质量发展大会"><div class="news-copy"><h3>长护险高质量发展大会</h3><p>2025年全国长期护理保险高质量发展大会成功召开，新风天域旗下易得康受邀深度参与。</p><a class="news-more" href="#">查看更多</a></div></article>
+        </div>
+        <div class="all-news"><a href="#">查看全部</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="footer"><img src="网站切图/认识易得康/figma/footer.png" alt="易得康联系方式与网站导航"></footer>
+  <div class="page-tail" aria-hidden="true"></div>
+  <button class="to-top" type="button" aria-label="返回顶部">↑</button>
+
+  <script>
+    const toTop = document.querySelector('.to-top');
+    addEventListener('scroll', () => toTop.classList.toggle('is-visible', scrollY > 700), { passive:true });
+    toTop.addEventListener('click', () => scrollTo({ top:0, behavior:'smooth' }));
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.14, rootMargin:'0px 0px -6% 0px' });
+    document.querySelectorAll('.reveal').forEach(node => revealObserver.observe(node));
+
+    let lastY = 0;
+    let direction = 1;
+    let counted = false;
+    addEventListener('scroll', () => {
+      direction = Math.sign(scrollY - lastY) || direction;
+      lastY = scrollY;
+    }, { passive:true });
+    const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2;
+    const runCounters = () => {
+      if (counted) return;
+      counted = true;
+      document.querySelectorAll('[data-value]').forEach((node, index) => {
+        const target = Number(node.dataset.value);
+        setTimeout(() => {
+          const started = performance.now();
+          const duration = 920;
+          const tick = now => {
+            const p = Math.min(1, (now - started) / duration);
+            node.textContent = Math.round(target * ease(p));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }, index * 85);
+      });
+    };
+    const scaleObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && direction > 0) {
+          runCounters();
+          scaleObserver.disconnect();
+        }
+      });
+    }, { threshold:.28 });
+    scaleObserver.observe(document.querySelector('.scale'));
+
+    document.querySelectorAll('a[href="#"]').forEach(link => link.addEventListener('click', event => event.preventDefault()));
+  </script>
+</body>
+</html>
