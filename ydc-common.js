@@ -59,11 +59,11 @@
           </div>
         </div>
         <div class="ydc-home-item has-dropdown">
-          <a class="ydc-home-trigger" href="认识易得康.html#news">公司动态</a>
+          <a class="ydc-home-trigger" href="认识易得康.html#responsibility">公司动态</a>
           <div class="ydc-home-submenu">
-            <a href="认识易得康.html#news">企业荣誉</a>
-            <a href="认识易得康.html#news">品牌动态</a>
-            <a href="认识易得康.html#news">媒体报道</a>
+            <a href="认识易得康.html#responsibility">企业荣誉</a>
+            <a href="认识易得康.html#responsibility">品牌动态</a>
+            <a href="认识易得康.html#responsibility">媒体报道</a>
           </div>
         </div>
         <div class="ydc-home-item">
