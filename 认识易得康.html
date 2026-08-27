@@ -22,6 +22,7 @@
       --navy:#1f2a3a;
       --line:#d9dfe3;
       --content:min(66.6667vw,1700px);
+      --stat-value-size:clamp(52px,5vw,96px);
       --asset:"网站切图/认识易得康/figma/";
     }
     *{box-sizing:border-box}
@@ -65,7 +66,15 @@
     .industry-copy p+p{margin-top:1.35em}
     .industry-copy strong{display:block;font-weight:500}
 
-    .care-scene{height:31.77vw;max-height:610px;background:url("网站切图/认识易得康/figma/care-scene.png") center center/cover no-repeat}
+    .care-scene{
+      height:31.77vw;
+      max-height:610px;
+      background-image:url("网站切图/认识易得康/figma/care-scene.png");
+      background-position:center center;
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-attachment:fixed;
+    }
 
     .belief{height:23.958vw;max-height:460px;background:var(--blue);color:#fff;display:flex;align-items:center}
     .belief .kicker,.belief .heading{color:#fff}
@@ -80,47 +89,58 @@
     .about-text{margin-top:2.1em;font-size:clamp(15px,1.0417vw,20px);line-height:1.5}
     .about-text p{margin:0}
     .about-text p+p{margin-top:1.5em}
-    .about-image{position:absolute;right:0;bottom:14.6%;width:42.74%;height:40.74%;object-fit:cover}
+    .about-image{position:absolute;right:0;bottom:14.6%;width:42.74%;height:40.74%;object-fit:cover;border-radius:var(--ydc-r-md)}
 
     .scale{height:40.52vw;max-height:778px;margin-top:-.1042vw;background:var(--blue);color:#fff;padding-top:4.9vw}
     .scale .heading{color:#fff}
     .scale-note{margin:.8em 0 0;font-size:clamp(13px,1.0417vw,20px);line-height:1.5}
     .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);row-gap:4.9vw;margin-top:4vw}
     .metric{text-align:center}
-    .metric-number{display:flex;justify-content:center;align-items:flex-start;line-height:.95;white-space:nowrap;font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-size:clamp(58px,5vw,100px);font-weight:400;letter-spacing:-.05em}
-    .metric-number small{font-size:.666em;line-height:1.12;letter-spacing:0;margin-left:.12em}
+    .metric-number{display:flex;justify-content:center;align-items:baseline;line-height:.95;white-space:nowrap;font-family:Inter,"Helvetica Neue",Arial,sans-serif;font-size:var(--stat-value-size);font-weight:400;letter-spacing:-.05em}
+    .metric-number small{font-size:.666em;line-height:1;letter-spacing:0;margin-left:.12em}
     .metric-label{display:block;margin-top:.65em;font-size:clamp(16px,1.25vw,25px);line-height:1.35}
 
-    .network{height:58.438vw;max-height:1122px;position:relative;background:#edf7fd;overflow:hidden}
-    .network-bg{position:absolute;left:0;top:0;width:104.271%;max-width:none;height:100%;object-fit:fill}
-    .network-title{position:relative;z-index:2;padding-top:5.85vw}
-    .network-node{position:absolute;z-index:3;border-radius:50%;background:var(--blue);box-shadow:0 0 0 0 rgba(18,182,241,.2);animation:networkPulse 2.8s ease-in-out infinite}
-    .network-node.node-a{left:62.34%;top:47.5%;width:clamp(16px,1.458vw,28px);height:clamp(16px,1.458vw,28px)}
-    .network-node.node-b{left:62.34%;top:55.7%;width:clamp(7px,.625vw,12px);height:clamp(7px,.625vw,12px);animation-delay:.5s}
-    .network-node.node-c{left:57.55%;top:52.05%;width:clamp(6px,.521vw,10px);height:clamp(6px,.521vw,10px);animation-delay:1s}
-    .network-node.node-d{left:70.26%;top:42.6%;width:clamp(8px,.729vw,14px);height:clamp(8px,.729vw,14px);animation-delay:1.5s}
-    @keyframes networkPulse{0%,100%{box-shadow:0 0 0 0 rgba(18,182,241,.22)}50%{box-shadow:0 0 0 8px rgba(18,182,241,0)}}
+    /* 地图画板与全页内容使用同一安全边界，标题复用上方模块的文字规范。 */
+    .network{position:relative;height:auto;min-height:auto;padding-top:0;margin-top:0;background:#edf7fd;overflow:hidden}
+    .network-visual{position:relative;margin:0 auto}
+    .network-title{position:relative;z-index:3;transform:translateY(140px)}
+    .network-map-window{position:relative;width:100%;aspect-ratio:2002/872;margin-top:-80px;overflow:hidden}
+    .network-map-window::after{content:"";position:absolute;inset:-1px;z-index:3;pointer-events:none;background:linear-gradient(90deg,#edf7fd 0,rgba(237,247,253,.96) 2.5%,rgba(237,247,253,.62) 6.5%,transparent 13%,transparent 87%,rgba(237,247,253,.62) 93.5%,rgba(237,247,253,.96) 97.5%,#edf7fd 100%),linear-gradient(180deg,#edf7fd 0,rgba(237,247,253,.92) 3%,rgba(237,247,253,.5) 8%,transparent 16%,transparent 94%,rgba(237,247,253,.35) 97%,rgba(237,247,253,.85) 99%,#edf7fd 100%)}
+    .network-map-layer{position:absolute;left:-21.5%;top:0;width:143%;aspect-ratio:2002/1122;transform:translateY(-30%)}
+    .network-figma{position:relative;z-index:1;display:block;width:100%;height:auto;max-width:none}
+    /* 悬停热区只覆盖完整画板原有的 5 个重点圆点，不绘制额外点位。 */
+    .network-hotspots{position:absolute;inset:0;z-index:2;pointer-events:none}
+    .network-hotspot{position:absolute;width:72px;height:72px;padding:0;border:0;border-radius:50%;background:transparent;pointer-events:auto;cursor:pointer;transform:translate(-50%,-50%);outline:none}
+    .network-hotspot::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:24px;border-radius:50%;background:rgba(126,221,255,.18);box-shadow:0 0 0 3px rgba(126,221,255,.22),0 0 18px rgba(90,211,255,.62),0 0 38px rgba(90,211,255,.34);transform:translate(-50%,-50%) scale(.58);opacity:0;transition:opacity .12s ease,transform .12s ease}
+    .network-hotspot:hover::after,.network-hotspot:focus-visible::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
+    .network-hotspot:nth-child(1){left:65.459%;top:41.734%}
+    .network-hotspot:nth-child(2){left:55.708%;top:82.394%}
+    .network-hotspot:nth-child(3){left:47.633%;top:64.790%}
+    .network-hotspot:nth-child(4){left:58.479%;top:66.869%}
+    .network-hotspot:nth-child(5){left:66.487%;top:62.669%}
 
-    .matrix{height:87.656vw;max-height:1683px;position:relative;overflow:hidden;color:#fff;background:#1f2a3a}
+    .matrix{height:auto;min-height:87.656vw;max-height:none;padding-bottom:clamp(72px,5vw,96px);position:relative;overflow:hidden;color:#fff;background:#1f2a3a}
     .matrix::before{content:"";position:absolute;inset:0;background:url("网站切图/认识易得康/figma/brand-matrix-bg.jpg") center/100% 100% no-repeat}
     .matrix::after{content:"";position:absolute;inset:0;background:rgba(31,42,58,.7)}
     .matrix-title{position:relative;z-index:2;padding-top:6.98vw}
     .matrix-title .kicker,.matrix-title .heading{color:#fff}
-    .matrix-panel{position:relative;z-index:2;width:var(--content);margin:5.78vw auto 0;border-radius:clamp(14px,1.67vw,32px);box-shadow:0 24px 70px rgba(0,0,0,.08)}
+    .matrix-panel-wrap{position:relative;z-index:2;width:var(--content);margin:5.78vw auto 0}
+    .matrix-panel-wrap picture{display:block}.matrix-panel{display:block;width:100%;height:auto;border-radius:var(--ydc-r-lg);box-shadow:0 24px 70px rgba(0,0,0,.08)}
 
-    .history{height:156.771vw;max-height:3010px;padding:8.6vw 0 7.1vw;background:#fff}
-    .history-list{margin-top:7.5vw;border-top:1px solid var(--line)}
-    .history-row{display:grid;grid-template-columns:14.5% 26% 1fr 100px;column-gap:2.4%;align-items:start;padding:1.55vw 0;border-bottom:1px solid var(--line);transition:background-color .28s,padding .28s}
+    .history{height:auto;max-height:none;padding:clamp(96px,8vw,154px) 0 clamp(70px,5vw,96px);background:#fff}
+    /* 发展历程标题、分隔线和内容列表统一使用同一内容边界。 */
+    .history-list{width:100%;margin:clamp(64px,5vw,96px) auto 0;border-top:1px solid var(--line)}
+    .history-row{position:relative;display:grid;grid-template-columns:14.5% 26% 1fr 100px;column-gap:2.4%;align-items:start;padding:1.55vw 0;border-bottom:1px solid var(--line);border-radius:var(--ydc-r-sm);transition:background-color .2s ease,box-shadow .2s ease,color .2s ease,transform .25s ease}
     .history-row.reveal{opacity:1;transform:none}
-    .history-row:hover{background:#f7fbfd;padding-left:12px;padding-right:12px}
-    .history-row:first-child .history-year,.history-row:first-child .history-name,.history-row:hover .history-year,.history-row:hover .history-name{color:var(--blue)}
+    .history-row:hover{z-index:2;background:#fff;box-shadow:none;transform:scale(1.018)}
+    .history-row:hover .history-year,.history-row:hover .history-name{color:var(--blue)}
     .history-year,.history-name{font-size:clamp(19px,1.25vw,24px);line-height:1.4;font-weight:500}
     .history-year::after{content:"年"}
     .history-description{font-size:clamp(12px,.729vw,14px);line-height:1.5;white-space:pre-line;color:#272c31}
     .history-image{width:100px;height:100px;object-fit:cover;justify-self:end}
 
-    .advantages{height:58.438vw;max-height:1122px;padding:0 0 5.625vw;background:#fff}
-    .advantages-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.45vw;margin-top:5vw}
+    .advantages{height:auto;max-height:none;padding:clamp(70px,5vw,96px) 0 clamp(86px,6vw,116px);background:#fff}
+    .advantages-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.45vw;margin-top:clamp(46px,4vw,78px)}
     .advantage-card{height:13.438vw;max-height:258px;display:grid;grid-template-columns:1fr 27%;align-items:center;overflow:hidden;background:#f5f6f7;border:1px solid #eef0f2;transition:transform .38s cubic-bezier(.22,1,.36,1),box-shadow .38s}
     .advantage-card:hover{transform:translateY(-5px);box-shadow:0 20px 46px rgba(25,47,65,.1)}
     .advantage-copy{padding:1.7vw 1.5vw 1.7vw 1.7vw}
@@ -129,18 +149,19 @@
     .advantage-card img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.22,1,.36,1)}
     .advantage-card:hover img{transform:scale(1.035)}
 
-    .responsibility{height:40.208vw;max-height:772px;padding:2.9vw 0 2.9vw;background:#fff}
-    .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25vw;margin-top:2.9vw}
+    .responsibility{height:auto;max-height:none;padding:clamp(68px,5vw,96px) 0 clamp(72px,5.5vw,106px);background:#fff}
+    .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25vw;margin-top:clamp(40px,3vw,58px)}
     .news-card{transition:transform .35s cubic-bezier(.22,1,.36,1)}
     .news-card:hover{transform:translateY(-6px)}
-    .news-card img{width:100%;aspect-ratio:410.667/273.553;object-fit:cover}
+    .news-card img{width:100%;aspect-ratio:410.667/273.553;object-fit:cover;border-radius:var(--ydc-r-md)}
     .news-copy{padding:1.25vw 1.25vw 0}
     .news-copy h3{margin:0 0 .28em;font-size:clamp(21px,1.458vw,30px);line-height:1.28;font-weight:500}
     .news-copy p{margin:0;font-size:clamp(13px,.833vw,16px);line-height:1.5}
-    .news-more{display:inline-block;margin-top:.55em;color:#111;text-decoration:none;font-size:clamp(13px,.833vw,16px)}
-    .news-more::after{content:" →";color:var(--blue)}
-    .all-news{display:flex;justify-content:center;margin-top:2.9vw}
-    .all-news a{display:inline-flex;align-items:center;justify-content:center;min-width:112px;height:44px;border:1px solid #9aa6ae;border-radius:4px;text-decoration:none;font-size:16px;transition:.25s}
+    .news-more{display:inline-flex;align-items:center;gap:8px;margin-top:8px;color:#111;text-decoration:none;font-size:clamp(13px,.833vw,16px);line-height:24px}
+    .news-more::after{content:"";display:block;width:6px;height:6px;margin-left:5px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);transform-origin:center;flex:0 0 auto}
+    /* 按内容自然撑开模块，按钮上下都保留独立安全间距。 */
+    .all-news{display:flex;justify-content:center;margin-top:clamp(40px,3vw,58px)}
+    .all-news a{display:inline-flex;align-items:center;justify-content:center;min-width:112px;height:44px;border:1px solid #9aa6ae;border-radius:var(--ydc-r-btn);text-decoration:none;font-size:16px;transition:.25s}
     .all-news a:hover{color:#fff;background:var(--blue);border-color:var(--blue)}
 
     .site-footer{line-height:0;background:#1f2a3a}
@@ -152,9 +173,8 @@
     @media (min-width:2200px){
       .hero-copy{padding-top:min(21.4vw,470px)}
       .scale{padding-top:min(4.9vw,108px)}
-      .network-title{padding-top:min(5.85vw,128px)}
       .matrix-title{padding-top:min(6.98vw,153px)}
-      .matrix-panel{margin-top:min(5.78vw,127px)}
+      .matrix-panel-wrap{margin-top:min(5.78vw,127px)}
     }
     @media (max-width:1180px){
       :root{--content:calc(100vw - 64px)}
@@ -175,9 +195,9 @@
       .about-image{aspect-ratio:547/330;align-self:end;margin-bottom:54px}
       .scale{min-height:680px;padding:80px 0}
       .metric-grid{margin-top:60px;row-gap:62px}
-      .network{min-height:680px}.network-title{padding-top:70px}
+      .network{min-height:0}
       .matrix{min-height:1050px;padding:96px 0}
-      .matrix-title{padding-top:0}.matrix-panel{margin-top:70px}
+      .matrix-title{padding-top:0}.matrix-panel-wrap{margin-top:70px}
       .history{height:auto;max-height:none;padding:100px 0 90px}.history-list{margin-top:75px}
       .history-row{grid-template-columns:100px 220px 1fr 88px;column-gap:22px;padding:24px 0}
       .history-image{width:88px;height:88px}
@@ -190,13 +210,13 @@
       .site-header{height:72px}.site-header>img{width:184%;transform:translateX(-8.5%)}
       .hero{height:720px}.hero-copy{padding-top:250px}.hero h1,.hero p{width:100%}.hero h1{font-size:46px}.hero p{font-size:16px}
       .industry{padding:76px 0}.industry-grid{grid-template-columns:1fr;gap:38px}
-      .care-scene{height:390px;background-position:58% center}
+      .care-scene{height:390px;background-position:58% center;background-attachment:scroll}
       .belief{padding:72px 0}.belief-grid>div:first-child,.belief-copy{width:100%}.belief-copy{margin-top:32px}
       .about{padding:72px 0}.about .content{display:block}.about-image{margin:42px 0 0;width:100%}
       .scale{padding:68px 0;min-height:auto}.metric-grid{grid-template-columns:repeat(2,1fr);row-gap:50px}.metric:nth-child(3){display:none}
-      .network{min-height:560px}.network-bg{object-position:center}.network-title{padding-top:60px}
-      .matrix{min-height:auto;padding:74px 0}.matrix-panel{width:calc(100vw - 24px);margin-top:48px;border-radius:14px}
-      .history{padding:76px 0}.history-list{margin-top:54px}.history-row{grid-template-columns:74px 1fr 72px;gap:12px;padding:24px 0}.history-description{grid-column:2/-1;margin-top:12px}.history-image{grid-column:3;grid-row:1;width:72px;height:72px}
+      .network{min-height:0}
+      .matrix{min-height:auto;padding:74px 0}.matrix-panel-wrap{width:calc(100vw - 24px);margin-top:48px}.matrix-panel{border-radius:var(--ydc-r-lg)}
+      .history{padding:76px 0}.history-list{width:100%;margin-top:54px}.history-row{grid-template-columns:74px 1fr 72px;gap:12px;padding:24px 0}.history-description{grid-column:2/-1;margin-top:12px}.history-image{grid-column:3;grid-row:1;width:72px;height:72px}
       .advantages{padding:72px 0}.advantages-grid{grid-template-columns:1fr;gap:14px;margin-top:46px}.advantage-card{height:220px}.advantage-copy{padding:22px}.advantage-copy h3{font-size:25px}
       .responsibility{padding:68px 0}.news-grid{grid-template-columns:1fr}.news-card{margin-bottom:28px}.news-copy{padding:18px 0 0}.all-news{margin-top:20px}
       .site-footer{overflow:hidden}.site-footer img{width:170%;max-width:none;transform:translateX(-7%)}
@@ -210,10 +230,27 @@
       html{scroll-behavior:auto}
       *,*::before,*::after{animation:none!important;transition:none!important}
       .reveal{opacity:1;transform:none}
+      .care-scene{background-attachment:scroll}
     }
+  </style>
+  <link rel="stylesheet" href="ydc-common.css?v=20260817-hainan-shift">
+  <style>
+    /* 内页基础规范覆盖：保留 Figma 结构，仅统一导航、安全距离与字号层级 */
+    :root{--content:var(--ydc-content)}
+    .site-header,.page-tail,.to-top{display:none!important}
+    .site-footer{display:none!important}
+    .content{width:var(--ydc-content);max-width:calc(100vw - 2 * clamp(80px,11vw,220px));margin-inline:auto}
+    .kicker{font-size:var(--ydc-small);line-height:1.35;font-weight:400}
+    .heading{font-size:var(--ydc-h2);line-height:1.22;font-weight:600}
+    .industry-copy,.belief-copy,.about-text{font-size:var(--ydc-body);line-height:1.75;text-align:justify;text-align-last:left;text-justify:inter-ideograph}
+    .hero h1{font-size:var(--ydc-h1);font-weight:600}
+    .hero p{font-size:var(--ydc-body);line-height:1.72;text-align:justify;text-align-last:left}
+    .history-description,.advantage-copy p,.news-copy p{font-size:var(--ydc-small);line-height:1.65;text-align:justify;text-align-last:left}
+    @media(max-width:1180px){.content{max-width:none}}
   </style>
 </head>
 <body>
+  <div data-ydc-header></div>
   <header class="site-header" aria-label="主导航">
     <img src="网站切图/认识易得康/figma/header.png" alt="易得康导航">
     <a class="nav-hit nav-logo" href="易得康官网.html">易得康首页</a>
@@ -236,7 +273,7 @@
       </div>
     </section>
 
-    <section class="industry">
+    <section class="industry" id="industry">
       <div class="content industry-grid reveal">
         <div>
           <p class="kicker">行业视角</p>
@@ -294,12 +331,15 @@
       </div>
     </section>
 
-    <section class="network">
-      <img class="network-bg" src="网站切图/认识易得康/figma/network-map.png" alt="易得康全国服务网络">
-      <span class="network-node node-a" aria-hidden="true"></span><span class="network-node node-b" aria-hidden="true"></span><span class="network-node node-c" aria-hidden="true"></span><span class="network-node node-d" aria-hidden="true"></span>
-      <div class="content network-title reveal">
-        <p class="kicker">易得康</p>
-        <h2 class="heading">全国服务网络</h2>
+    <section class="network" id="network">
+      <div class="content network-visual">
+        <div class="network-title">
+          <p class="kicker">易得康</p>
+          <h2 class="heading">全国服务网络</h2>
+        </div>
+        <div class="network-map-window ydc-network-stage">
+          <div class="ltc-network-map ydc-network-map" data-ydc-network-map aria-label="易得康全国服务网络地图"></div>
+        </div>
       </div>
     </section>
 
@@ -308,7 +348,12 @@
         <p class="kicker">品牌矩阵</p>
         <h2 class="heading">品牌矩阵</h2>
       </div>
-      <img class="matrix-panel reveal" src="网站切图/认识易得康/figma/brand-matrix-panel.png" alt="新风天域与易得康品牌服务矩阵">
+      <div class="matrix-panel-wrap reveal">
+        <picture>
+          <source media="(max-width:768px)" srcset="网站切图/认识易得康/figma/brand-matrix-home-panel.png">
+          <img class="matrix-panel" src="网站切图/认识易得康/figma/brand-matrix-panel.png" alt="易得康品牌矩阵，包含居家服务体系与场景解决方案">
+        </picture>
+      </div>
     </section>
 
     <section class="history" id="history">
@@ -373,7 +418,7 @@
 推出YDCare肿瘤居家医疗护理服务，推动居家医疗照护从基础照护走向精细化、专病化、数智化服务
 
 亮相第十一届沪港大都市发展研讨会，作为行业代表进行“沪港两地居家医疗护理跨境创新实践”项目签约，探索居家医疗护理跨区域协同新模式</div><img class="history-image" src="网站切图/认识易得康/figma/history-2025.png" alt="2025 探索数智跨境"></article>
-          <article class="history-row reveal"><div class="history-year">2026</div><div class="history-name">应势：数智提质扩容</div><div class="history-description"></div><img class="history-image" src="网站切图/认识易得康/figma/history-2026.png" alt="2026 数智提质扩容"></article>
+          <article class="history-row reveal"><div class="history-year">2026</div><div class="history-name">应势：数智提质扩容</div><div class="history-description">启动科技驱动，科技赋能战略响应长护险全国推行，提质扩容政策要求，易得康创新引入激光雷达等数智创新技术，赋能智慧监管，推动全国化服务网络扩容与运营质量同步提升。</div><img class="history-image" src="网站切图/认识易得康/figma/history-2026.png" alt="2026 数智提质扩容"></article>
         </div>
       </div>
     </section>
@@ -396,16 +441,17 @@
       <div class="content">
         <h2 class="heading reveal">社会责任与行业共建</h2>
         <div class="news-grid">
-          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-main.png" alt="长期护理保险高质量发展大会"><div class="news-copy"><h3>长护险高质量发展大会</h3><p>2025年全国长期护理保险高质量发展大会成功召开，新风天域旗下易得康受邀深度参与。</p><a class="news-more" href="#">查看更多</a></div></article>
-          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-placeholder.png" alt="2026有光长护险服务者盛典"><div class="news-copy"><h3>2026有光长护险服务者盛典</h3><p>聚光成塔，向光而行｜2026年度易得康·有光长护服务者盛典圆满闭幕。</p><a class="news-more" href="#">查看更多</a></div></article>
-          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-placeholder.png" alt="长期护理保险高质量发展大会"><div class="news-copy"><h3>长护险高质量发展大会</h3><p>2025年全国长期护理保险高质量发展大会成功召开，新风天域旗下易得康受邀深度参与。</p><a class="news-more" href="#">查看更多</a></div></article>
+          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-main.png" alt="长护险高质量发展大会"><div class="news-copy"><h3>长护险高质量发展大会</h3><p>2025年全国长期护理保险高质量发展大会成功召开新风天域旗下易得康受邀深度参与</p><a class="news-more" href="#">查看更多</a></div></article>
+          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-2026.jpg" alt="2026有光长护险服务者盛典"><div class="news-copy"><h3>2026有光长护险服务者盛典</h3><p>聚光成塔，向光而行 | 2026年度易得康·有光长护服务者盛典圆满闭幕</p><a class="news-more" href="#">查看更多</a></div></article>
+          <article class="news-card reveal"><img src="网站切图/认识易得康/figma/news-kln.jpg" alt="KLN及研华签署合作备忘录"><div class="news-copy"><h3>KLN及研华签署合作备忘录</h3><p>易得康与KLN及研华签署合作备忘录，支持香港医疗体系数智化转型。</p><a class="news-more" href="#">查看更多</a></div></article>
         </div>
         <div class="all-news"><a href="#">查看全部</a></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer" id="footer"><img src="网站切图/认识易得康/figma/footer.png" alt="易得康联系方式与网站导航"></footer>
+  <footer class="site-footer" id="footer"><img src="网站切图/首页/figma-更新/footer.png" alt="易得康联系方式与网站导航"></footer>
+  <div data-ydc-footer></div>
   <div class="page-tail" aria-hidden="true"></div>
   <button class="to-top" type="button" aria-label="返回顶部">↑</button>
 
@@ -461,5 +507,6 @@
 
     document.querySelectorAll('a[href="#"]').forEach(link => link.addEventListener('click', event => event.preventDefault()));
   </script>
+  <script src="ydc-common.js?v=20260817-network-sync-labels-neimeng-xinjiang"></script>
 </body>
 </html>

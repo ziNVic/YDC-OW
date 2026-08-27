@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN" class="page-restoring">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="专业护理人才｜易得康医疗">
+  <title>专业护理人才｜易得康医疗</title>
+  <link rel="stylesheet" href="ydc-common.css">
+  <script>if('scrollRestoration' in history) history.scrollRestoration='manual'</script>
+  <style>
+    .talent-intro {
+      padding: clamp(78px, 6.25vw, 120px) 0 clamp(70px, 5vw, 96px);
+      background: #fff;
+    }
+
+    .talent-intro .ydc-title {
+      margin-top: 0;
+    }
+
+    .talent-intro .ydc-body {
+      max-width: 72ch;
+      margin: clamp(24px, 2vw, 38px) 0 0;
+    }
+
+    .talent-list {
+      background: #fff;
+    }
+
+    .talent-row {
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      padding-inline: max(var(--ydc-safe-gutter), calc((100vw - var(--ydc-content)) / 2));
+      background: #fff;
+    }
+
+    .talent-row:nth-child(even) {
+      background: #f2fbfe;
+    }
+
+    .talent-row-inner {
+      /* 与页面标题共用同一内容安全线，不再重复向内缩进。 */
+      width: 100%;
+      max-width: var(--ydc-content);
+      min-height: 640px;
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 710px) clamp(330px, 21.4vw, 411px);
+      justify-content: space-between;
+      align-items: center;
+      gap: clamp(72px, 8vw, 154px);
+    }
+
+    .talent-copy {
+      align-self: center;
+    }
+
+    .talent-role {
+      margin: 0 0 clamp(20px, 1.6vw, 30px);
+      color: var(--ydc-blue);
+      font-size: var(--ydc-h3);
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .talent-copy .ydc-body {
+      margin: 0;
+      max-width: 710px;
+    }
+
+    .talent-copy .ydc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      max-width: 710px;
+      margin-top: clamp(18px, 1.8vw, 34px);
+    }
+
+    .talent-copy .ydc-tag {
+      flex: 0 0 auto;
+      width: auto;
+      height: 32px;
+      min-height: 32px;
+      padding: 0 12px;
+      border-width: 1px;
+      border-radius: var(--ydc-r-sm);
+      font-size: var(--ydc-small);
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .talent-photo {
+      width: 100%;
+      aspect-ratio: 411 / 496;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: var(--ydc-r-lg);
+      background: #e9eef1;
+    }
+
+    @media (max-width: 1180px) {
+      .talent-row,
+      .talent-row-inner {
+        min-height: 560px;
+      }
+
+      .talent-row-inner {
+        grid-template-columns: minmax(0, 1fr) minmax(290px, 34%);
+        gap: 54px;
+      }
+
+      .talent-copy .ydc-tags { gap: 8px; }
+    }
+
+    @media (max-width: 760px) {
+      .talent-intro {
+        padding: 66px 0 58px;
+      }
+
+      .talent-row {
+        min-height: 0;
+        padding: 62px 0;
+      }
+
+      .talent-row-inner {
+        width: calc(100% - 40px);
+        min-height: 0;
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .talent-photo {
+        width: min(100%, 410px);
+        justify-self: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div data-ydc-header></div>
+
+  <main>
+    <section class="ydc-hero">
+      <img class="ydc-hero-bg" src="网站切图/内页/figma-原型资源/images/091d487d25d21fd88daa3d410a6e7054f2765b40.jpg" alt="专业护理人才">
+      <div class="ydc-container ydc-hero-copy">
+        <h1>专业护理人才</h1>
+        <p>专业有标准，让照护回归信任与尊重</p>
+      </div>
+    </section>
+
+    <section class="talent-intro">
+      <div class="ydc-container">
+        <p class="ydc-kicker">专业人才</p>
+        <h2 class="ydc-title">专业照护，从专业的人开始</h2>
+        <p class="ydc-body">易得康围绕生活照护、长期护理、居家医疗、康复、营养、母婴与人才培养等场景，汇聚不同职业背景的专业人才，以清晰分工、团队协作、持续培训与质量管理，为家庭及合作机构提供稳定、连续的照护支持。</p>
+      </div>
+    </section>
+
+    <div class="talent-list">
+      <section class="talent-row" id="专业护理员">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">专业护理员</h2>
+            <p class="ydc-body">经过系统培训与岗位考核，围绕高龄、失能、半失能及需要日常支持的人群，提供生活照料、安全看护、行动协助与日常陪伴，并按照服务计划记录和反馈服务情况。</p>
+            <div class="ydc-tags"><span class="ydc-tag">生活照料</span><span class="ydc-tag">安全看护</span><span class="ydc-tag">行动协助</span><span class="ydc-tag">日常陪伴</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/01-专业护理员.png" alt="专业护理员">
+        </div>
+      </section>
+
+      <section class="talent-row" id="执业护士">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">执业护士</h2>
+            <p class="ydc-body">将规范的临床护理延伸至家庭，保障院后和长期照护的连续性与安全性。<br>具备法定执业资格和临床护理能力，根据患者健康状况、医嘱与护理评估，提供健康监测、伤口及导管护理、用药指导和健康宣教等专业服务，并参与居家护理计划的执行与反馈。</p>
+            <div class="ydc-tags"><span class="ydc-tag">护理评估</span><span class="ydc-tag">专项护理</span><span class="ydc-tag">健康监测</span><span class="ydc-tag">健康宣教</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/02-执业护士.png" alt="执业护士">
+        </div>
+      </section>
+
+      <section class="talent-row" id="母婴护理师">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">母婴护理师</h2>
+            <p class="ydc-body">用科学、细致的专业陪伴，帮助家庭平稳走过产后与新生儿照护关键期。<br>围绕孕产妇恢复与新生儿早期照护，提供产妇生活照料、新生儿日常护理、喂养支持、健康观察与家庭育儿指导，并根据母婴阶段和家庭需求调整服务重点。</p>
+            <div class="ydc-tags"><span class="ydc-tag">产妇照料</span><span class="ydc-tag">新生儿护理</span><span class="ydc-tag">喂养支持</span><span class="ydc-tag">育儿指导</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/03-母婴护理师.png" alt="母婴护理师">
+        </div>
+      </section>
+
+      <section class="talent-row" id="注册营养师">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">注册营养师</h2>
+            <p class="ydc-body">把营养管理融入照护过程，为康复、慢病管理与全生命周期健康提供支持。<br>依据健康状况、疾病特点、饮食习惯与营养评估，为老年人、慢病患者、康复期人群及母婴家庭提供膳食建议、营养干预与持续随访，并与照护团队协同调整营养方案。</p>
+            <div class="ydc-tags"><span class="ydc-tag">营养评估</span><span class="ydc-tag">膳食指导</span><span class="ydc-tag">营养干预</span><span class="ydc-tag">持续随访</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/04-注册营养师.png" alt="注册营养师">
+        </div>
+      </section>
+
+      <section class="talent-row" id="康复治疗师">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">康复治疗师</h2>
+            <p class="ydc-body">让康复从医院延伸到家庭，帮助患者在真实生活中恢复能力与信心。<br>基于专业评估，为术后、卒中、骨折、慢病及功能障碍人群制定个体化康复计划，通过运动治疗、功能训练、转移指导与家庭训练建议，帮助改善身体功能和日常活动能力。</p>
+            <div class="ydc-tags"><span class="ydc-tag">康复评估</span><span class="ydc-tag">功能训练</span><span class="ydc-tag">行动改善</span><span class="ydc-tag">家庭指导</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/05-康复治疗师.png" alt="康复治疗师">
+        </div>
+      </section>
+
+      <section class="talent-row" id="长期照护师">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">长期照护师</h2>
+            <p class="ydc-body">连接制度保障与家庭需要，提升失能照护的专业化和职业化水平。<br>面向失能人员及有长期照护需求的人群，提供基本生活照料以及与之密切相关的护理协助、功能维护、风险识别和心理支持。</p>
+            <div class="ydc-tags"><span class="ydc-tag">失能照护</span><span class="ydc-tag">功能维护</span><span class="ydc-tag">风险识别</span><span class="ydc-tag">心理支持</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/06-长期照护师.png" alt="长期照护师">
+        </div>
+      </section>
+
+      <section class="talent-row" id="照护培训导师">
+        <div class="talent-row-inner">
+          <div class="talent-copy ydc-reveal">
+            <h2 class="talent-role">照护培训导师</h2>
+            <p class="ydc-body">把一线经验沉淀为可学、可练、可考核的标准，推动照护人才持续成长。<br>具备照护实践与教学经验，负责课程研发、理论讲授、实操训练、岗前培训与在岗带教，围绕生活照料、安全护理、康复训练、母婴护理及服务规范等内容培养专业人才。</p>
+            <div class="ydc-tags"><span class="ydc-tag">课程研发</span><span class="ydc-tag">实操教学</span><span class="ydc-tag">岗位带教</span><span class="ydc-tag">能力考核</span></div>
+          </div>
+          <img class="talent-photo ydc-reveal" src="网站切图/内页/专业护理人才/07-照护培训导师.png" alt="照护培训导师">
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div data-ydc-footer></div>
+  <script src="ydc-common.js"></script>
+</body>
+</html>
