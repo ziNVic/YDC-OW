@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="ydc-home-item">
-          <a class="ydc-home-trigger" href="专业护理培训.html#join">加入我们</a>
+          <a class="ydc-home-trigger" href="https://ehr-ydcare.zhiye.com/" target="_blank" rel="noopener noreferrer">加入我们</a>
         </div>
       </nav>
       <div class="ydc-home-contact-wrap"><a class="ydc-home-contact" href="mailto:info@ydcare.com">联系我们</a><span class="ydc-contact-qr" aria-hidden="true"><img src="网站切图/首页/figma-更新/contact-qr.png" alt=""></span></div>
@@ -76,6 +76,66 @@
   const footer = `
     <footer class="ydc-home-footer" id="contact">
       <img src="网站切图/首页/figma-更新/footer.png" alt="易得康联系方式">
+      <div class="ydc-footer-social-icons" aria-label="官方社媒与联系方式">
+        <div class="ydc-footer-left-content">
+          <div class="ydc-footer-slogan"><strong>医疗照护 · 医养到家</strong><span>致力于成为中国值得信赖的专业照护合作伙伴</span></div>
+          <div class="ydc-footer-social-icons-list">
+            <button type="button" class="ydc-footer-social-item" aria-label="查看订阅号二维码"><img src="社媒icon/icon/公众号_订阅号.png" alt=""><span>订阅号</span><span class="ydc-footer-social-qr" aria-hidden="true"><img src="社媒icon/美化后/订阅号.png" alt=""></span></button>
+            <button type="button" class="ydc-footer-social-item" aria-label="查看服务号二维码"><img src="社媒icon/icon/公众号_订阅号.png" alt=""><span>服务号</span><span class="ydc-footer-social-qr" aria-hidden="true"><img src="社媒icon/美化后/服务号.png" alt=""></span></button>
+            <button type="button" class="ydc-footer-social-item" aria-label="查看视频号二维码"><img src="社媒icon/icon/视频号.png" alt=""><span>视频号</span><span class="ydc-footer-social-qr" aria-hidden="true"><img src="社媒icon/美化后/视频号.png" alt=""></span></button>
+            <button type="button" class="ydc-footer-social-item" aria-label="查看小红书二维码"><img src="社媒icon/icon/小红书.png" alt=""><span>小红书</span><span class="ydc-footer-social-qr" aria-hidden="true"><img src="社媒icon/美化后/小红书.png" alt=""></span></button>
+          </div>
+          <div class="ydc-footer-contact-details" aria-label="公司联系方式">
+            <a href="tel:400-921-5121">服务热线：400-921-5121</a>
+            <a href="mailto:info@ydcare.com">企业邮箱：info@ydcare.com</a>
+            <span>公司地址：上海市 徐汇区 斜土路 2899号 光启文化广场A座2楼</span>
+          </div>
+        </div>
+      </div>
+      <nav class="ydc-footer-menu" aria-label="页脚导航">
+        <div class="ydc-footer-menu-grid">
+          <section class="ydc-footer-menu-column">
+            <h3><a href="居家照护服务.html">居家照护服务</a></h3>
+            <a href="认识易得康.html#about">关于我们</a>
+            <a href="认识易得康.html#history">品牌历程</a>
+            <a href="认识易得康.html#network">服务网络</a>
+            <a href="认识易得康.html#advantages">能力优势</a>
+            <a href="认识易得康.html#responsibility">社会责任</a>
+          </section>
+          <section class="ydc-footer-menu-column">
+            <h3><a href="易得康官网.html#services">核心服务</a></h3>
+            <a href="长期护理保险.html">长期护理保险</a>
+            <a href="居家照护服务.html">居家照护服务</a>
+            <a href="居家医疗服务.html">居家医疗服务</a>
+            <a href="居家母婴护理.html">居家母婴护理</a>
+            <a href="专业护理培训.html">专业护理培训</a>
+          </section>
+          <section class="ydc-footer-menu-column">
+            <h3><a href="长期护理保险.html">解决方案</a></h3>
+            <a href="机构及院内合作.html">机构/院内合作</a>
+            <a href="商业保险合作.html">商业保险合作</a>
+            <a href="智慧照护平台.html">智慧照护平台</a>
+            <a href="专业护理培训.html">照护人才供给</a>
+          </section>
+          <section class="ydc-footer-menu-column">
+            <h3><a href="专业护理人才.html">专业人才</a></h3>
+            <a href="专业护理人才.html#专业护理员">专业护理员</a>
+            <a href="专业护理人才.html#长期照护师">长期照护师</a>
+            <a href="专业护理人才.html#执业护士">执业护士</a>
+            <a href="专业护理人才.html#康复治疗师">康复治疗师</a>
+            <a href="专业护理人才.html#注册营养师">注册营养师</a>
+            <a href="专业护理人才.html#母婴护理师">母婴护理师</a>
+            <a href="专业护理人才.html#照护培训导师">照护培训导师</a>
+          </section>
+          <section class="ydc-footer-menu-column">
+            <h3><a href="认识易得康.html#responsibility">公司动态</a></h3>
+            <span>企业荣誉</span>
+            <span>品牌动态</span>
+            <span>媒体报道</span>
+            <a href="https://ehr-ydcare.zhiye.com/" target="_blank" rel="noopener noreferrer">加入我们</a>
+          </section>
+        </div>
+      </nav>
     </footer>`;
 
   document.querySelectorAll('[data-ydc-header]').forEach((element) => {
