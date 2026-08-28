@@ -507,6 +507,9 @@ img{display:block;max-width:100%;object-fit:cover} a{color:inherit;text-decorati
     grid-template-columns:615fr 649fr;
     gap:88px;
   }
+  .home-medical-page .ydc-hero + .ydc-section .ydc-inner{
+    width:86%;
+  }
   .home-medical-page .ydc-section.soft:not(.ydc-service-section){
     min-height:490px;
     padding:104px 0 88px;
@@ -550,8 +553,38 @@ img{display:block;max-width:100%;object-fit:cover} a{color:inherit;text-decorati
   .home-medical-page .ydc-service-copy .ydc-btn{
     margin-top:32px;
   }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-line{
+    grid-template-rows:auto auto auto auto auto;
+    column-gap:80px;
+    row-gap:0;
+  }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-copy{
+    display:contents;
+  }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-copy .ydc-kicker{
+    grid-column:1;
+    grid-row:1;
+  }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-copy .ydc-title{
+    grid-column:1;
+    grid-row:2;
+  }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-copy .ydc-tags{
+    grid-column:1;
+    grid-row:3;
+  }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-copy .ydc-body{
+    grid-column:1;
+    grid-row:4;
+  }
+  .home-medical-page .ydc-service-section:not(.soft) .ydc-service-copy .ydc-btn{
+    grid-column:1;
+    grid-row:5;
+  }
   .home-medical-page .ydc-service-section:not(.soft) .ydc-service-media-frame{
-    margin-top:239px;
+    grid-column:2;
+    grid-row:4;
+    margin-top:24px;
   }
   .home-medical-page .ydc-service-section.soft .ydc-service-media-frame{
     margin-top:148px;
@@ -574,6 +607,11 @@ img{display:block;max-width:100%;object-fit:cover} a{color:inherit;text-decorati
 .home-medical-page .ydc-service-copy .ydc-btn{
   margin-left:0;
   text-align:left;
+}
+.home-medical-page .ydc-service-section .ydc-service-copy .ydc-btn{
+  width:100%;
+  align-self:stretch;
+  text-align:center;
 }
 
 /* Home medical business sections: lock the desktop copy/media proportions to Figma. */
