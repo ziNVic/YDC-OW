@@ -87,7 +87,7 @@
           </div>
           <div class="ydc-footer-contact-details" aria-label="公司联系方式">
             <a href="tel:400-921-5121">服务热线：400-921-5121</a>
-            <a href="mailto:info@ydcare.com">企业邮箱：info@ydcare.com</a>
+            <a href="mailto:info@ydcare.cn">企业邮箱：info@ydcare.cn</a>
             <span>公司地址：上海市 徐汇区 斜土路 2899号 光启文化广场A座2楼</span>
           </div>
         </div>
