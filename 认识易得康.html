@@ -9,10 +9,6 @@
   <script>
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     document.documentElement.classList.add("page-restoring");
-    addEventListener("pageshow", () => {
-      scrollTo(0, 0);
-      requestAnimationFrame(() => document.documentElement.classList.remove("page-restoring"));
-    });
   </script>
   <style>
     :root{

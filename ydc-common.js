@@ -28,12 +28,12 @@
           </div>
         </div>
         <div class="ydc-home-item has-dropdown">
-          <a class="ydc-home-trigger" href="居家照护服务.html">我们的服务</a>
+          <a class="ydc-home-trigger" href="居家医疗服务.html">我们的服务</a>
           <div class="ydc-home-submenu">
-            <a href="居家照护服务.html">居家照护服务</a>
             <a href="居家医疗服务.html">居家医疗服务</a>
             <a href="居家母婴护理.html">居家母婴护理</a>
             <a href="专业护理培训.html">专业护理培训</a>
+            <a href="居家照护服务.html">居家照护服务</a>
           </div>
         </div>
         <div class="ydc-home-item has-dropdown">
@@ -43,13 +43,13 @@
             <a href="机构及院内合作.html">机构/院内合作</a>
             <a href="商业保险合作.html">商业保险合作</a>
             <a href="智慧照护平台.html">智慧照护平台</a>
-            <a href="专业护理培训.html">照护人才供给</a>
+            <a href="专业护理培训.html#talent-supply">照护人才供给</a>
           </div>
         </div>
         <div class="ydc-home-item has-dropdown">
           <a class="ydc-home-trigger" href="专业护理人才.html">专业护理人才</a>
           <div class="ydc-home-submenu">
-            <a href="专业护理人才.html#护理员">专业护理员</a>
+            <a href="专业护理人才.html#专业护理员">专业护理员</a>
             <a href="专业护理人才.html#长期照护师">长期照护师</a>
             <a href="专业护理人才.html#执业护士">执业护士</a>
             <a href="专业护理人才.html#康复治疗师">康复治疗师</a>
@@ -144,6 +144,25 @@
   document.querySelectorAll('[data-ydc-footer]').forEach((element) => {
     element.innerHTML = footer;
   });
+
+  // Every local navigation destination starts below the fixed header.
+  const navigationTargets = new Set();
+  document.querySelectorAll('.ydc-header a[href*="#"]').forEach((link) => {
+    const url = new URL(link.href);
+    if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!target) return;
+    target.classList.add('ydc-nav-anchor');
+    navigationTargets.add(target);
+  });
+  const currentNavigationTarget = () => {
+    try {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      return navigationTargets.has(target) ? target : null;
+    } catch {
+      return null;
+    }
+  };
 
   // Keep the maternal-care social block in the same order as the Figma layout:
   // title, social channels, description, then the outlined CTA.
@@ -547,11 +566,18 @@
     });
   });
 
-  const restoreTop = () => requestAnimationFrame(() => scrollTo(0, 0));
+  const restorePagePosition = () => {
+    const target = currentNavigationTarget();
+    if (target) target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    else scrollTo(0, 0);
+  };
   const navigation = performance.getEntriesByType('navigation')[0];
-  if (navigation?.type === 'reload') restoreTop();
+  addEventListener('hashchange', () => {
+    if (currentNavigationTarget()) restorePagePosition();
+  });
+  if (navigation?.type === 'reload') restorePagePosition();
   addEventListener('pageshow', (event) => {
-    if (event.persisted || navigation?.type === 'reload') restoreTop();
+    if (currentNavigationTarget() || event.persisted || navigation?.type === 'reload') restorePagePosition();
     document.documentElement.classList.remove('page-restoring');
   });
 })();
