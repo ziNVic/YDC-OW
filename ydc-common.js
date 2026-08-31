@@ -308,14 +308,12 @@
       </g>
     </svg>
     <div class="ltc-network-points" aria-label="服务城市与站点分布"></div>
-    <div class="ltc-network-tooltip" role="status" aria-live="polite"></div>
     <p class="ydc-sr-only">易得康服务网络覆盖 73 个城市，包含环渤海区、长三角区、华中区、大湾区与西部区。</p>`;
 
   document.querySelectorAll('[data-ydc-network-map]').forEach((map) => {
     map.innerHTML = networkMapMarkup;
     const pointsLayer = map.querySelector('.ltc-network-points');
-    const tooltip = map.querySelector('.ltc-network-tooltip');
-    if (!pointsLayer || !tooltip) return;
+    if (!pointsLayer) return;
 
     const regionMeta = {
       bohai: { label: '环渤海区', x: 66.774, y: 49.271 },
@@ -352,22 +350,18 @@
         [55.962,90.286],[55.619,91.228]
       ]
     };
-    const regionEntries = Object.entries(regionMeta);
     const pointData = Object.entries(regionPoints).flatMap(([region, points]) =>
       points.map(([x, y, kind]) => ({ x, y, kind, region }))
     );
-    const regionStationNumber = Object.fromEntries(regionEntries.map(([key]) => [key, 0]));
     const pointNodes = pointData.map((point, index) => {
       const button = document.createElement('button');
-      const stationNumber = ++regionStationNumber[point.region];
-      const stationName = `${regionMeta[point.region].label}服务站 ${String(stationNumber).padStart(2, '0')}`;
+      const stationName = `${regionMeta[point.region].label}服务站`;
       button.className = 'ltc-network-point';
       if (point.kind === 'hub') button.classList.add('is-region-hub');
       button.type = 'button';
       button.dataset.x = String(point.x);
       button.dataset.y = String(point.y);
       button.dataset.region = point.region;
-      button.dataset.station = stationName;
       if (point.y >= 89 && point.x <= 57) button.classList.add('is-hainan-point');
       if (point.region === 'bohai') button.classList.add('is-bohai-point');
       button.setAttribute('aria-label', stationName);
@@ -386,13 +380,7 @@
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
     let mapInView = false;
 
-    const showTooltip = (text, x, y, offsetX = 0, offsetY = 0) => {
-      tooltip.textContent = text;
-      tooltip.style.left = `calc(${x}% + ${offsetX}px)`;
-      tooltip.style.top = `calc(${y}% + ${offsetY}px)`;
-      tooltip.classList.add('is-visible');
-    };
-    const hideTooltip = () => tooltip.classList.remove('is-visible');
+    // 点位与区域仅保留高亮反馈，不显示服务站编号或站点数量提示。
     const clearRegionHighlight = () => pointNodes.forEach((point) => point.classList.remove('is-region-peer'));
     const highlightRegion = (region, sourcePoint = null) => pointNodes.forEach((point) => {
       point.classList.toggle('is-region-peer', point !== sourcePoint && point.dataset.region === region);
@@ -401,16 +389,11 @@
       pointNodes.forEach((point) => point.classList.remove('is-selected'));
       map.querySelectorAll('.ltc-network-region').forEach((region) => region.classList.remove('is-selected'));
       clearRegionHighlight();
-      hideTooltip();
     };
 
     pointNodes.forEach((point) => {
       const activate = () => {
         highlightRegion(point.dataset.region, point);
-        const localOffset = point.classList.contains('is-hainan-point')
-          ? [10, -10]
-          : point.classList.contains('is-bohai-point') ? [0, 15] : [0, 0];
-        showTooltip(point.dataset.station, Number(point.dataset.x), Number(point.dataset.y), ...localOffset);
       };
       point.addEventListener('pointerenter', () => {
         if (finePointer.matches) activate();
@@ -418,12 +401,10 @@
       point.addEventListener('pointerleave', () => {
         if (!finePointer.matches) return;
         clearRegionHighlight();
-        hideTooltip();
       });
       point.addEventListener('focus', activate);
       point.addEventListener('blur', () => {
         clearRegionHighlight();
-        hideTooltip();
       });
       point.addEventListener('click', (event) => {
         if (finePointer.matches) return;
@@ -439,12 +420,8 @@
 
     map.querySelectorAll('.ltc-network-region').forEach((regionNode) => {
       const region = regionNode.dataset.region;
-      const text = `${regionMeta[region].label} ${regionStationNumber[region]} 个站点`;
-      regionNode.setAttribute('aria-label', text);
       const activate = () => {
         highlightRegion(region);
-        const regionOffset = region === 'bohai' ? [0, 15] : [0, 0];
-        showTooltip(text, Number(regionNode.dataset.x), Number(regionNode.dataset.y), ...regionOffset);
       };
       regionNode.addEventListener('pointerenter', () => {
         if (finePointer.matches) activate();
@@ -452,12 +429,10 @@
       regionNode.addEventListener('pointerleave', () => {
         if (!finePointer.matches) return;
         clearRegionHighlight();
-        hideTooltip();
       });
       regionNode.addEventListener('focus', activate);
       regionNode.addEventListener('blur', () => {
         clearRegionHighlight();
-        hideTooltip();
       });
       regionNode.addEventListener('keydown', (event) => {
         if (event.key === ' ' || event.key === 'Enter') event.preventDefault();

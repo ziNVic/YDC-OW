@@ -274,8 +274,6 @@ img{display:block;max-width:100%;object-fit:cover} a{color:inherit;text-decorati
 .ydc-network-map .ltc-network-point:focus-visible{transform:translate(-50%,-50%) scale(1.5)}
 .ydc-network-map .ltc-network-point:focus-visible::before{animation:none;opacity:0}
 .ydc-network-map .ltc-network-point:focus-visible::after{box-shadow:0 0 0 2px rgba(255,255,255,.7),0 0 15px rgba(56,198,244,.74)}
-.ydc-network-map .ltc-network-tooltip{position:absolute;z-index:4;max-width:190px;margin-left:var(--network-overlay-shift-x);margin-top:var(--network-overlay-shift-y);padding:7px 10px;border:1px solid rgba(6,176,239,.35);border-radius:var(--ydc-r-sm);background:rgba(5,48,72,.92);box-shadow:0 8px 22px rgba(5,48,72,.16);color:#fff;font-size:13px;line-height:1.35;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,8px);transition:opacity .15s ease,visibility .15s ease}
-.ydc-network-map .ltc-network-tooltip.is-visible{opacity:1;visibility:visible}
 @keyframes ltc-network-pulse{0%{opacity:.8;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.5)}}
 @media(hover:hover) and (pointer:fine){
   .ydc-network-map .ltc-network-point:hover{transform:translate(-50%,-50%) scale(1.5)}
@@ -661,7 +659,6 @@ img{display:block;max-width:100%;object-fit:cover} a{color:inherit;text-decorati
   .ydc-network-map .ltc-network-point.is-selected{transform:translate(-50%,-50%) scale(1.35)}
   .ydc-network-map .ltc-network-region{pointer-events:none}
   .ydc-network-map .ltc-network-region rect,.ydc-network-map .ltc-network-region text{display:none}
-  .ydc-network-map .ltc-network-tooltip{display:none!important}
 }
 @media(prefers-reduced-motion:reduce){
   .ydc-network-map .ltc-network-point,.ydc-network-map .ltc-network-point::after{transition:none}
