@@ -281,102 +281,126 @@
     counterObserver.observe(statBand);
   } else if (statBand) runCounters();
 
-  // 全国服务网络公共组件：两个页面从同一份 SVG、点位数据与交互逻辑渲染。
-  // 后续只需修改这里和对应的公共 CSS，两处地图会自动同步。
+  // 全国服务网络：依据用户提供的中国地图，按国界、海岸与岛屿控制点分区映射。
+  // 初步配准后再逐点核查陆地；最终修正与边界检查位于 previews/network-placement/audit/。
+  // 图标、字体不参与形变；原有小点仅保留示意，不新增未经确认的服务城市。
+  const networkAssetPath = '网站切图/认识易得康/network-icons/';
+  const networkRegions = [
+    {"id": "bohai", "label": "环渤海区", "x": 1184, "y": 713, "size": 216, "badgeX": 1143, "badgeY": 637, "badgeWidth": 92},
+    {"id": "delta", "label": "长三角区", "x": 1294, "y": 887, "size": 168, "badgeX": 1318, "badgeY": 814, "badgeWidth": 92},
+    {"id": "central", "label": "华中区", "x": 1131.8, "y": 926.0, "size": 168, "badgeX": 1086.8, "badgeY": 860.0, "badgeWidth": 90},
+    {"id": "west", "label": "西部区", "x": 907.3, "y": 902.8, "size": 178, "badgeX": 862.3, "badgeY": 813, "badgeWidth": 90},
+    {"id": "bay", "label": "大湾区", "x": 1116, "y": 1056, "size": 154, "badgeX": 1097, "badgeY": 1006, "badgeWidth": 90}
+  ];
+  const networkProvinceLabels = [
+    {"text": "新疆维吾尔自治区", "x": 600.9, "y": 701.2, "anchorX": 600.9, "anchorY": 701.2},
+    {"text": "西藏自治区", "x": 644.7, "y": 906.4, "anchorX": 644.7, "anchorY": 906.4, "secondLine": "（待开发）"},
+    {"text": "青海省", "x": 808.2, "y": 786.9, "anchorX": 808.2, "anchorY": 786.9},
+    {"text": "甘肃省", "x": 894.9, "y": 754.6, "anchorX": 912.9, "anchorY": 762.6},
+    {"text": "宁夏回族自治区", "x": 985.0, "y": 771.2, "anchorX": 973.0, "anchorY": 769.2},
+    {"text": "内蒙古自治区", "x": 1097.1, "y": 688.3, "anchorX": 1097.1, "anchorY": 688.3},
+    {"text": "陕西省", "x": 1031.6, "y": 811.7, "anchorX": 1031.6, "anchorY": 811.7},
+    {"text": "山西省", "x": 1102.0, "y": 794.8, "anchorX": 1102.0, "anchorY": 794.8},
+    {"text": "河北省", "x": 1161.3, "y": 781.6, "anchorX": 1161.3, "anchorY": 781.6},
+    {"text": "北京市", "x": 1145, "y": 707, "anchorX": 1184, "anchorY": 713, "leader": true},
+    {"text": "天津市", "x": 1205, "y": 752, "anchorX": 1184, "anchorY": 739, "leader": true},
+    {"text": "黑龙江省", "x": 1362.5, "y": 621.2, "anchorX": 1362.5, "anchorY": 621.2},
+    {"text": "吉林省", "x": 1362.2, "y": 666.7, "anchorX": 1352.2, "anchorY": 666.7},
+    {"text": "辽宁省", "x": 1300, "y": 688, "anchorX": 1300, "anchorY": 688},
+    {"text": "山东省", "x": 1198, "y": 807, "anchorX": 1227.3, "anchorY": 796.6, "leader": true},
+    {"text": "河南省", "x": 1128.1, "y": 853, "anchorX": 1128.1, "anchorY": 864.1},
+    {"text": "江苏省", "x": 1238, "y": 888, "anchorX": 1260.6, "anchorY": 871.2},
+    {"text": "安徽省", "x": 1210, "y": 924, "anchorX": 1197.1, "anchorY": 915.5},
+    {"text": "上海市", "x": 1350, "y": 901, "anchorX": 1294, "anchorY": 887, "leader": true},
+    {"text": "浙江省", "x": 1275.2, "y": 959.1, "anchorX": 1275.2, "anchorY": 959.1},
+    {"text": "四川省", "x": 856.4, "y": 909.4, "anchorX": 874.4, "anchorY": 907.4},
+    {"text": "重庆市", "x": 975.5, "y": 941.6, "anchorX": 963.5, "anchorY": 941.6},
+    {"text": "湖北省", "x": 1086.3, "y": 923.8, "anchorX": 1101.3, "anchorY": 913.8},
+    {"text": "湖南省", "x": 1035, "y": 1004, "anchorX": 1070.4, "anchorY": 1002.4, "leader": true},
+    {"text": "江西省", "x": 1165.1, "y": 995.2, "anchorX": 1165.1, "anchorY": 995.2},
+    {"text": "福建省", "x": 1219.5, "y": 1035.0, "anchorX": 1219.5, "anchorY": 1035.0},
+    {"text": "贵州省", "x": 953, "y": 988, "anchorX": 961.0, "anchorY": 993.6},
+    {"text": "云南省", "x": 868.9, "y": 1030.6, "anchorX": 868.9, "anchorY": 1030.6},
+    {"text": "广西壮族自治区", "x": 980, "y": 1051, "anchorX": 980, "anchorY": 1048},
+    {"text": "广东省", "x": 1165, "y": 1065, "anchorX": 1164, "anchorY": 1045},
+    {"text": "香港", "x": 1198, "y": 1091, "anchorX": 1138, "anchorY": 1068, "leader": true},
+    {"text": "澳门", "x": 1120, "y": 1125, "anchorX": 1117, "anchorY": 1082, "leader": true},
+    {"text": "台湾省", "x": 1306.4, "y": 1048.0, "anchorX": 1306.4, "anchorY": 1048.0},
+    {"text": "海南省", "x": 992.3, "y": 1159.4, "anchorX": 1039.3, "anchorY": 1154.4, "leader": true}
+  ];
+  const networkRegionPoints = {
+    "bohai": [[1312.5, 618.1], [1305.0, 664.0], [1264, 685], [1179.6, 727.7], [1282, 701], [1175, 746], [1165.0, 760.7], [1239.3, 778.5], [1206.8, 783.5]],
+    "delta": [[1224.4, 851.9], [1253.2, 853.9], [1273, 888], [1239.3, 935.0], [1233.4, 964.7], [1259, 979], [1245, 994], [1204.5, 1002.2]],
+    "central": [[1133.0, 828.4], [1102.2, 830.6], [1181.3, 919.5], [1057.5, 938.8], [1098.2, 935.8], [1054.6, 974.0], [1140.5, 968.4], [1177.1, 964.1], [1082.6, 988.2], [1098.4, 998.9], [984.3, 996.7], [1090.8, 1020.6], [1244, 1009]],
+    "west": [[1006.1, 746.4], [922.7, 783.7], [944.4, 865.0], [893.3, 874.7], [923.6, 925.2], [985.7, 965.3]],
+    "bay": [[994.9, 1027.5], [1065.4, 1067.7], [983, 1064], [1003, 1074], [1192.8, 1047.9], [1138, 1068], [1094, 1086], [1117, 1082], [1067, 1094], [1074, 1137], [1068, 1157], [1030, 1153], [1046, 1167]]
+  };
   const networkMapMarkup = `
-    <img class="ltc-network-labels" src="网站切图/认识易得康/figma/network-labels-adjusted.png" alt="" aria-hidden="true">
-    <img class="ltc-network-hainan-label" src="网站切图/认识易得康/figma/network-labels-adjusted.png" alt="" aria-hidden="true">
     <svg class="ltc-network-regions" viewBox="0 0 1920 1261" preserveAspectRatio="none" aria-label="五大服务区域">
-      <g class="ltc-network-region" data-region="bohai" data-x="66.774" data-y="49.271" role="button" tabindex="0" aria-label="环渤海区">
-        <ellipse cx="1282" cy="621" rx="114" ry="114" data-region="bohai"></ellipse>
-        <rect x="1237" y="543" width="90" height="35" rx="5"></rect>
-        <text x="1282" y="568">环渤海区</text>
-      </g>
-      <g class="ltc-network-region" data-region="delta" data-x="67.849" data-y="67.843" role="button" tabindex="0" aria-label="长三角区">
-        <ellipse cx="1303" cy="856" rx="84" ry="84" data-region="delta"></ellipse>
-        <rect x="1258" y="796" width="90" height="35" rx="5"></rect>
-        <text x="1303" y="821">长三角区</text>
-      </g>
-      <g class="ltc-network-region" data-region="central" data-x="59.495" data-y="71.57" role="button" tabindex="0" aria-label="华中区">
-        <ellipse cx="1142" cy="902" rx="84" ry="84" data-region="central"></ellipse>
-        <rect x="1097" y="856" width="90" height="35" rx="5"></rect>
-        <text x="1142" y="881">华中区</text>
-      </g>
-      <g class="ltc-network-region" data-region="bay" data-x="56.462" data-y="85.493" role="button" tabindex="0" aria-label="大湾区">
-        <ellipse cx="1084" cy="1078" rx="102" ry="102" data-region="bay"></ellipse>
-        <rect x="1039" y="1022" width="90" height="35" rx="5"></rect>
-        <text x="1084" y="1047">大湾区</text>
-      </g>
-      <g class="ltc-network-region" data-region="west" data-x="48.199" data-y="69.739" role="button" tabindex="0" aria-label="西部区">
-        <ellipse cx="925" cy="879" rx="89" ry="89" data-region="west"></ellipse>
-        <rect x="880" y="824" width="90" height="35" rx="5"></rect>
-        <text x="925" y="849">西部区</text>
-      </g>
+      ${networkRegions.map((region) => `
+        <g class="ltc-network-region" data-region="${region.id}" role="button" tabindex="0" aria-label="${region.label}">
+          <image class="ltc-network-region-art" href="${networkAssetPath}region-circle.png" x="${region.x - region.size / 2}" y="${region.y - region.size / 2}" width="${region.size}" height="${region.size}"></image>
+          <circle class="ltc-network-region-hit" cx="${region.x}" cy="${region.y}" r="${region.size / 2}"></circle>
+        </g>`).join('')}
+    </svg>
+    <svg class="ltc-network-provinces" viewBox="0 0 1920 1261" preserveAspectRatio="none" aria-label="省市位置标注">
+      ${networkProvinceLabels.filter((label) => label.leader).map((label) => `<line x1="${label.anchorX}" y1="${label.anchorY}" x2="${label.x + Math.max(-label.text.length * 7 - 4, Math.min(label.text.length * 7 + 4, label.anchorX - label.x))}" y2="${label.y - (Math.abs(label.y - label.anchorY) > 15 ? 17 : 5)}"></line>`).join('')}
+      ${networkProvinceLabels.map((label) => `<text x="${label.x}" y="${label.y}">${label.text}${label.secondLine ? `<tspan x="${label.x}" dy="17">${label.secondLine}</tspan>` : ''}</text>`).join('')}
     </svg>
     <div class="ltc-network-points" aria-label="服务城市与站点分布"></div>
+    <svg class="ltc-network-badges" viewBox="0 0 1920 1261" preserveAspectRatio="none" aria-hidden="true">
+      ${networkRegions.map((region) => `
+        <rect x="${region.badgeX}" y="${region.badgeY}" width="${region.badgeWidth}" height="37" rx="5"></rect>
+        <image href="${networkAssetPath}${region.id}.png" x="${region.badgeX}" y="${region.badgeY}" width="${region.badgeWidth}" height="37"></image>`).join('')}
+    </svg>
     <p class="ydc-sr-only">易得康服务网络覆盖 73 个城市，包含环渤海区、长三角区、华中区、大湾区与西部区。</p>`;
 
   document.querySelectorAll('[data-ydc-network-map]').forEach((map) => {
     map.innerHTML = networkMapMarkup;
-    const pointsLayer = map.querySelector('.ltc-network-points');
-    if (!pointsLayer) return;
 
-    const regionMeta = {
-      bohai: { label: '环渤海区', x: 66.774, y: 49.271 },
-      delta: { label: '长三角区', x: 67.849, y: 67.843 },
-      central: { label: '华中区', x: 59.495, y: 71.57 },
-      west: { label: '西部区', x: 48.199, y: 69.739 },
-      bay: { label: '大湾区', x: 56.462, y: 85.493 }
+    // 标注画板与底图共用 cover 比例及裁切中心。
+    const stage = map.closest('.ydc-network-stage');
+    const syncMapViewport = () => {
+      if (!stage) return;
+      const { width, height } = stage.getBoundingClientRect();
+      const scale = Math.max(width / 2736, height / 1795);
+      map.style.width = `${2736 * scale}px`;
+      map.style.setProperty('--network-map-scale', String(2736 * scale / 1920));
+      map.style.height = `${1795 * scale}px`;
     };
-    const regionPoints = {
-      bohai: [
-        [70.246,42.87],[71.346,47.948],[66.774,49.271,'hub'],[70.349,52.548],
-        [62.7,52.931],[68.923,53.961],[62.0,54.132],[63.13,55.298],
-        [65.282,56.469],[64.291,57.378]
-      ],
-      delta: [
-        [64.566,66.146],[65.725,67.15],[67.849,67.843,'hub'],[69.249,70.647],
-        [66.605,73.232],[66.608,74.905],[68.914,75.312],[66.883,75.818],
-        [67.65,76.734]
-      ],
-      central: [
-        [61.317,64.972],[60.378,66.137],[63.79,70.971],[59.495,71.57,'hub'],
-        [58.558,72.485],[60.757,72.98],[58.061,74.152],[62.854,75.556],
-        [65.006,75.82],[60.271,76.062],[60.932,77.147],[54.53,77.152],
-        [60.161,77.583],[66.441,79.819]
-      ],
-      west: [
-        [53.765,58.466],[49.842,62.891],[52.399,68.142],[48.199,69.739,'hub'],
-        [50.471,71.403],[50.909,72.565],[52.564,74.154]
-      ],
-      bay: [
-        [54.261,78.982],[58.223,81.889],[51.226,81.987],[52,81.991],
-        [63.794,82.412],[61.505,82.65],[60.306,83.277],[61.028,83.914],
-        [59.683,84.61],[56.462,85.493,'hub'],[57.003,88.787],[56.397,89.451],
-        [55.962,90.286],[55.619,91.228]
-      ]
-    };
-    const pointData = Object.entries(regionPoints).flatMap(([region, points]) =>
-      points.map(([x, y, kind]) => ({ x, y, kind, region }))
+    syncMapViewport();
+    if (stage && 'ResizeObserver' in window) new ResizeObserver(syncMapViewport).observe(stage);
+    else window.addEventListener('resize', syncMapViewport, { passive: true });
+
+    const pointsLayer = map.querySelector('.ltc-network-points');
+    const regionMeta = Object.fromEntries(networkRegions.map((region) => [region.id, region]));
+    const pointData = Object.entries(networkRegionPoints).flatMap(([region, points]) =>
+      points.map(([x, y]) => ({ x: x / 19.2, y: y / 12.61, region }))
     );
     const pointNodes = pointData.map((point, index) => {
       const button = document.createElement('button');
-      const stationName = `${regionMeta[point.region].label}服务站`;
       button.className = 'ltc-network-point';
-      if (point.kind === 'hub') button.classList.add('is-region-hub');
       button.type = 'button';
       button.dataset.x = String(point.x);
       button.dataset.y = String(point.y);
       button.dataset.region = point.region;
-      if (point.y >= 89 && point.x <= 57) button.classList.add('is-hainan-point');
-      if (point.region === 'bohai') button.classList.add('is-bohai-point');
-      button.setAttribute('aria-label', stationName);
+      button.dataset.pointId = String(index + 1);
+      button.setAttribute('aria-label', `${regionMeta[point.region].label}服务站`);
       button.style.left = `${point.x}%`;
       button.style.top = `${point.y}%`;
-      // 0.05 秒一档循环错开，含 0.3 秒渐入后总时长不超过 1.5 秒。
+      const visual = document.createElement('span');
+      visual.className = 'ltc-network-dot';
+      visual.setAttribute('aria-hidden', 'true');
+      const dot = document.createElement('img');
+      dot.src = `${networkAssetPath}station-dot.png`;
+      dot.alt = '';
+      dot.draggable = false;
+      visual.append(dot);
+      button.append(visual);
       button.style.setProperty('--network-enter-delay', `${(index % 25) * .05}s`);
-      // 与 2 秒脉冲周期错开相位，避免所有点同步闪动。
-      button.style.setProperty('--network-pulse-delay', `${-((index * .137) % 2).toFixed(3)}s`);
+      const pulseDuration = 3.6 + (index % 5) * .15;
+      button.style.setProperty('--network-pulse-duration', `${pulseDuration}s`);
+      button.style.setProperty('--network-pulse-delay', `${-((index * .619) % pulseDuration).toFixed(3)}s`);
       pointsLayer.append(button);
       return button;
     });
