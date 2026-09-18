@@ -282,13 +282,13 @@
   } else if (statBand) runCounters();
 
   // 全国服务网络：依据用户提供的中国地图，按国界、海岸与岛屿控制点分区映射。
-  // 初步配准后再逐点核查陆地；最终修正与边界检查位于 previews/network-placement/audit/。
-  // 图标、字体不参与形变；原有小点仅保留示意，不新增未经确认的服务城市。
+  // 城市坐标映射及海岸核查记录位于 previews/network-placement/city-layout/。
+  // 图标、字体不参与形变；点位依据城市地理分布，仅作示意，不新增业务覆盖声明。
   const networkAssetPath = '网站切图/认识易得康/network-icons/';
   const networkRegions = [
     {"id": "bohai", "label": "环渤海区", "x": 1184, "y": 713, "size": 216, "badgeX": 1143, "badgeY": 637, "badgeWidth": 92},
     {"id": "delta", "label": "长三角区", "x": 1294, "y": 887, "size": 168, "badgeX": 1318, "badgeY": 814, "badgeWidth": 92},
-    {"id": "central", "label": "华中区", "x": 1131.8, "y": 926.0, "size": 168, "badgeX": 1086.8, "badgeY": 860.0, "badgeWidth": 90},
+    {"id": "central", "label": "华中区", "x": 1131.8, "y": 926.0, "size": 168, "badgeX": 1106, "badgeY": 879, "badgeWidth": 90},
     {"id": "west", "label": "西部区", "x": 907.3, "y": 902.8, "size": 178, "badgeX": 862.3, "badgeY": 813, "badgeWidth": 90},
     {"id": "bay", "label": "大湾区", "x": 1116, "y": 1056, "size": 154, "badgeX": 1097, "badgeY": 1006, "badgeWidth": 90}
   ];
@@ -303,24 +303,24 @@
     {"text": "山西省", "x": 1102.0, "y": 794.8, "anchorX": 1102.0, "anchorY": 794.8},
     {"text": "河北省", "x": 1161.3, "y": 781.6, "anchorX": 1161.3, "anchorY": 781.6},
     {"text": "北京市", "x": 1145, "y": 707, "anchorX": 1184, "anchorY": 713, "leader": true},
-    {"text": "天津市", "x": 1205, "y": 752, "anchorX": 1184, "anchorY": 739, "leader": true},
+    {"text": "天津市", "x": 1205, "y": 752, "anchorX": 1194.6, "anchorY": 726, "leader": true},
     {"text": "黑龙江省", "x": 1362.5, "y": 621.2, "anchorX": 1362.5, "anchorY": 621.2},
     {"text": "吉林省", "x": 1362.2, "y": 666.7, "anchorX": 1352.2, "anchorY": 666.7},
-    {"text": "辽宁省", "x": 1300, "y": 688, "anchorX": 1300, "anchorY": 688},
+    {"text": "辽宁省", "x": 1320, "y": 712, "anchorX": 1300, "anchorY": 688},
     {"text": "山东省", "x": 1198, "y": 807, "anchorX": 1227.3, "anchorY": 796.6, "leader": true},
-    {"text": "河南省", "x": 1128.1, "y": 853, "anchorX": 1128.1, "anchorY": 864.1},
-    {"text": "江苏省", "x": 1238, "y": 888, "anchorX": 1260.6, "anchorY": 871.2},
-    {"text": "安徽省", "x": 1210, "y": 924, "anchorX": 1197.1, "anchorY": 915.5},
+    {"text": "河南省", "x": 1134, "y": 856, "anchorX": 1128.1, "anchorY": 864.1},
+    {"text": "江苏省", "x": 1250, "y": 845, "anchorX": 1260.6, "anchorY": 871.2},
+    {"text": "安徽省", "x": 1220, "y": 924, "anchorX": 1197.1, "anchorY": 915.5},
     {"text": "上海市", "x": 1350, "y": 901, "anchorX": 1294, "anchorY": 887, "leader": true},
-    {"text": "浙江省", "x": 1275.2, "y": 959.1, "anchorX": 1275.2, "anchorY": 959.1},
+    {"text": "浙江省", "x": 1266, "y": 971, "anchorX": 1275.2, "anchorY": 959.1},
     {"text": "四川省", "x": 856.4, "y": 909.4, "anchorX": 874.4, "anchorY": 907.4},
-    {"text": "重庆市", "x": 975.5, "y": 941.6, "anchorX": 963.5, "anchorY": 941.6},
-    {"text": "湖北省", "x": 1086.3, "y": 923.8, "anchorX": 1101.3, "anchorY": 913.8},
+    {"text": "重庆市", "x": 989, "y": 958, "anchorX": 963.5, "anchorY": 941.6},
+    {"text": "湖北省", "x": 1066, "y": 947, "anchorX": 1101.3, "anchorY": 913.8},
     {"text": "湖南省", "x": 1035, "y": 1004, "anchorX": 1070.4, "anchorY": 1002.4, "leader": true},
     {"text": "江西省", "x": 1165.1, "y": 995.2, "anchorX": 1165.1, "anchorY": 995.2},
-    {"text": "福建省", "x": 1219.5, "y": 1035.0, "anchorX": 1219.5, "anchorY": 1035.0},
-    {"text": "贵州省", "x": 953, "y": 988, "anchorX": 961.0, "anchorY": 993.6},
-    {"text": "云南省", "x": 868.9, "y": 1030.6, "anchorX": 868.9, "anchorY": 1030.6},
+    {"text": "福建省", "x": 1247, "y": 1043, "anchorX": 1220, "anchorY": 1022, "leader": true},
+    {"text": "贵州省", "x": 1000, "y": 995, "anchorX": 961.0, "anchorY": 993.6},
+    {"text": "云南省", "x": 846, "y": 1036, "anchorX": 868.9, "anchorY": 1030.6},
     {"text": "广西壮族自治区", "x": 980, "y": 1051, "anchorX": 980, "anchorY": 1048},
     {"text": "广东省", "x": 1165, "y": 1065, "anchorX": 1164, "anchorY": 1045},
     {"text": "香港", "x": 1198, "y": 1091, "anchorX": 1138, "anchorY": 1068, "leader": true},
@@ -328,13 +328,79 @@
     {"text": "台湾省", "x": 1306.4, "y": 1048.0, "anchorX": 1306.4, "anchorY": 1048.0},
     {"text": "海南省", "x": 992.3, "y": 1159.4, "anchorX": 1039.3, "anchorY": 1154.4, "leader": true}
   ];
-  const networkRegionPoints = {
-    "bohai": [[1312.5, 618.1], [1305.0, 664.0], [1264, 685], [1179.6, 727.7], [1282, 701], [1175, 746], [1165.0, 760.7], [1239.3, 778.5], [1206.8, 783.5]],
-    "delta": [[1224.4, 851.9], [1253.2, 853.9], [1273, 888], [1239.3, 935.0], [1233.4, 964.7], [1259, 979], [1245, 994], [1204.5, 1002.2]],
-    "central": [[1133.0, 828.4], [1102.2, 830.6], [1181.3, 919.5], [1057.5, 938.8], [1098.2, 935.8], [1054.6, 974.0], [1140.5, 968.4], [1177.1, 964.1], [1082.6, 988.2], [1098.4, 998.9], [984.3, 996.7], [1090.8, 1020.6], [1244, 1009]],
-    "west": [[1006.1, 746.4], [922.7, 783.7], [944.4, 865.0], [893.3, 874.7], [923.6, 925.2], [985.7, 965.3]],
-    "bay": [[994.9, 1027.5], [1065.4, 1067.7], [983, 1064], [1003, 1074], [1192.8, 1047.9], [1138, 1068], [1094, 1086], [1117, 1082], [1067, 1094], [1074, 1137], [1068, 1157], [1030, 1153], [1046, 1167]]
-  };
+  // 按 GeoNames 城市坐标映射到斜视底图；城市分布示意，不代表实际服务城市清单。
+  // Source: https://www.geonames.org/ · CC BY 4.0. Offline records: previews/network-placement/city-layout/.
+  const networkCityPoints = [
+    {"city": "天津", "x": 1194.6, "y": 726.0, "region": "bohai", "compact": true},
+    {"city": "廊坊", "x": 1188.1, "y": 720.8, "region": "bohai", "compact": true},
+    {"city": "唐山", "x": 1211.4, "y": 713.8, "region": "bohai", "compact": true},
+    {"city": "保定", "x": 1165.3, "y": 737.1, "region": "bohai", "compact": false},
+    {"city": "石家庄", "x": 1145.5, "y": 756.6, "region": "bohai", "compact": false},
+    {"city": "济南", "x": 1190.1, "y": 780.4, "region": "bohai", "compact": false},
+    {"city": "青岛", "x": 1245.8, "y": 789.2, "region": "bohai", "compact": false},
+    {"city": "潍坊", "x": 1224.1, "y": 771.5, "region": "bohai", "compact": false},
+    {"city": "烟台", "x": 1255.3, "y": 762.8, "region": "bohai", "compact": false},
+    {"city": "沈阳", "x": 1275.6, "y": 677.3, "region": "bohai", "compact": false},
+    {"city": "大连", "x": 1265.0, "y": 724.2, "region": "bohai", "compact": true},
+    {"city": "长春", "x": 1315.3, "y": 655.2, "region": "bohai", "compact": false},
+    {"city": "哈尔滨", "x": 1343.4, "y": 635.2, "region": "bohai", "compact": false},
+    {"city": "苏州", "x": 1278.4, "y": 889.4, "region": "delta", "compact": true},
+    {"city": "无锡", "x": 1272.3, "y": 886.3, "region": "delta", "compact": true},
+    {"city": "常州", "x": 1265.4, "y": 884.0, "region": "delta", "compact": true},
+    {"city": "南京", "x": 1239.4, "y": 882.0, "region": "delta", "compact": true},
+    {"city": "镇江", "x": 1254.3, "y": 877.5, "region": "delta", "compact": true},
+    {"city": "扬州", "x": 1253.6, "y": 874.1, "region": "delta", "compact": true},
+    {"city": "南通", "x": 1283.7, "y": 877.3, "region": "delta", "compact": true},
+    {"city": "嘉兴", "x": 1281.8, "y": 897.5, "region": "delta", "compact": true},
+    {"city": "湖州", "x": 1268.4, "y": 898.5, "region": "delta", "compact": true},
+    {"city": "杭州", "x": 1269.8, "y": 911.9, "region": "delta", "compact": true},
+    {"city": "绍兴", "x": 1279.0, "y": 913.6, "region": "delta", "compact": true},
+    {"city": "宁波", "x": 1298.9, "y": 917.4, "region": "delta", "compact": true},
+    {"city": "金华", "x": 1256.6, "y": 931.1, "region": "delta", "compact": true},
+    {"city": "台州", "x": 1297.2, "y": 928.5, "region": "delta", "compact": true},
+    {"city": "温州", "x": 1277.8, "y": 944.7, "region": "delta", "compact": false},
+    {"city": "合肥", "x": 1204.8, "y": 890.5, "region": "delta", "compact": false},
+    {"city": "芜湖", "x": 1231.5, "y": 896.5, "region": "delta", "compact": true},
+    {"city": "滁州", "x": 1228.2, "y": 878.2, "region": "delta", "compact": true},
+    {"city": "郑州", "x": 1124.1, "y": 832.7, "region": "central", "compact": false},
+    {"city": "洛阳", "x": 1097.8, "y": 835.0, "region": "central", "compact": false},
+    {"city": "南阳", "x": 1097.0, "y": 873.4, "region": "central", "compact": true},
+    {"city": "襄阳", "x": 1086.1, "y": 894.1, "region": "central", "compact": true},
+    {"city": "宜昌", "x": 1064.1, "y": 919.7, "region": "central", "compact": false},
+    {"city": "长沙", "x": 1100.1, "y": 967.2, "region": "central", "compact": true},
+    {"city": "株洲", "x": 1104.2, "y": 973.1, "region": "central", "compact": true},
+    {"city": "湘潭", "x": 1098.5, "y": 973.1, "region": "central", "compact": true},
+    {"city": "南昌", "x": 1165.9, "y": 954.2, "region": "central", "compact": true},
+    {"city": "九江", "x": 1171.4, "y": 936.5, "region": "central", "compact": true},
+    {"city": "重庆", "x": 956.5, "y": 930.8, "region": "west", "compact": false},
+    {"city": "绵阳", "x": 921.6, "y": 887.7, "region": "west", "compact": true},
+    {"city": "德阳", "x": 914.7, "y": 893.9, "region": "west", "compact": true},
+    {"city": "南充", "x": 949.1, "y": 904.9, "region": "west", "compact": false},
+    {"city": "泸州", "x": 931.9, "y": 941.4, "region": "west", "compact": false},
+    {"city": "西安", "x": 1020.1, "y": 839.3, "region": "west", "compact": false},
+    {"city": "贵阳", "x": 956.7, "y": 987.5, "region": "west", "compact": false},
+    {"city": "昆明", "x": 886.9, "y": 1014.5, "region": "west", "compact": false},
+    {"city": "兰州", "x": 917.1, "y": 790.8, "region": "west", "compact": false},
+    {"city": "银川", "x": 974.2, "y": 745.6, "region": "west", "compact": false},
+    {"city": "佛山", "x": 1113.8, "y": 1058.9, "region": "bay", "compact": true},
+    {"city": "东莞", "x": 1123.0, "y": 1058.3, "region": "bay", "compact": true},
+    {"city": "深圳", "x": 1132.2, "y": 1065.4, "region": "bay", "compact": true},
+    {"city": "惠州", "x": 1136.8, "y": 1052.3, "region": "bay", "compact": true},
+    {"city": "中山", "x": 1114.8, "y": 1073.7, "region": "bay", "compact": true},
+    {"city": "珠海", "x": 1117.5, "y": 1079.8, "region": "bay", "compact": true},
+    {"city": "江门", "x": 1111.1, "y": 1072.2, "region": "bay", "compact": true},
+    {"city": "香港", "x": 1138.0, "y": 1068.0, "region": "bay", "compact": true},
+    {"city": "澳门", "x": 1117.0, "y": 1082.0, "region": "bay", "compact": true},
+    {"city": "南宁", "x": 991.4, "y": 1066.7, "region": "bay", "compact": false},
+    {"city": "海口", "x": 1074.0, "y": 1137.0, "region": "bay", "compact": false},
+    {"city": "三亚", "x": 1046.0, "y": 1167.0, "region": "bay", "compact": false},
+    {"city": "东方", "x": 1030.0, "y": 1153.0, "region": "bay", "compact": false},
+    {"city": "万宁", "x": 1068.0, "y": 1157.0, "region": "bay", "compact": false},
+    {"city": "太原", "x": 1107.5, "y": 761.9, "region": "bohai", "compact": false},
+    {"city": "福州", "x": 1240.0, "y": 988.4, "region": "delta", "compact": false},
+    {"city": "泉州", "x": 1221.8, "y": 1011.7, "region": "delta", "compact": true},
+    {"city": "厦门", "x": 1209.6, "y": 1020.5, "region": "delta", "compact": true}
+  ];
   const networkMapMarkup = `
     <svg class="ltc-network-regions" viewBox="0 0 1920 1261" preserveAspectRatio="none" aria-label="五大服务区域">
       ${networkRegions.map((region) => `
@@ -347,26 +413,41 @@
       ${networkProvinceLabels.filter((label) => label.leader).map((label) => `<line x1="${label.anchorX}" y1="${label.anchorY}" x2="${label.x + Math.max(-label.text.length * 7 - 4, Math.min(label.text.length * 7 + 4, label.anchorX - label.x))}" y2="${label.y - (Math.abs(label.y - label.anchorY) > 15 ? 17 : 5)}"></line>`).join('')}
       ${networkProvinceLabels.map((label) => `<text x="${label.x}" y="${label.y}">${label.text}${label.secondLine ? `<tspan x="${label.x}" dy="17">${label.secondLine}</tspan>` : ''}</text>`).join('')}
     </svg>
-    <div class="ltc-network-points" aria-label="服务城市与站点分布"></div>
+    <div class="ltc-network-points" aria-label="服务网络分布示意"></div>
     <svg class="ltc-network-badges" viewBox="0 0 1920 1261" preserveAspectRatio="none" aria-hidden="true">
       ${networkRegions.map((region) => `
         <rect x="${region.badgeX}" y="${region.badgeY}" width="${region.badgeWidth}" height="37" rx="5"></rect>
         <image href="${networkAssetPath}${region.id}.png" x="${region.badgeX}" y="${region.badgeY}" width="${region.badgeWidth}" height="37"></image>`).join('')}
     </svg>
-    <p class="ydc-sr-only">易得康服务网络覆盖 73 个城市，包含环渤海区、长三角区、华中区、大湾区与西部区。</p>`;
+    <p class="ydc-sr-only">易得康服务网络覆盖 73 个城市，包含环渤海区、长三角区、华中区、大湾区与西部区。点位按主要城市位置示意，不代表实际服务站点或完整服务城市清单。</p>`;
 
   document.querySelectorAll('[data-ydc-network-map]').forEach((map) => {
     map.innerHTML = networkMapMarkup;
 
-    // 标注画板与底图共用 cover 比例及裁切中心。
+    // 用同一裁切矩形同步底图和标注画板，保留已校准的地理坐标。
     const stage = map.closest('.ydc-network-stage');
+    const crop = stage?.dataset.networkCrop?.trim().split(/\s+/).map(Number);
+    const hasCrop = crop?.length === 4 && crop.every(Number.isFinite) && crop[2] > 0 && crop[3] > 0;
     const syncMapViewport = () => {
       if (!stage) return;
       const { width, height } = stage.getBoundingClientRect();
-      const scale = Math.max(width / 2736, height / 1795);
+      if (!width || !height) return;
+      const [x, y, cropWidth, cropHeight] = hasCrop
+        ? [crop[0] * 2736 / 1920, crop[1] * 1795 / 1261, crop[2] * 2736 / 1920, crop[3] * 1795 / 1261]
+        : [0, 0, 2736, 1795];
+      const scale = Math.max(width / cropWidth, height / cropHeight);
       map.style.width = `${2736 * scale}px`;
       map.style.setProperty('--network-map-scale', String(2736 * scale / 1920));
       map.style.height = `${1795 * scale}px`;
+      if (hasCrop) {
+        const left = (width - cropWidth * scale) / 2 - x * scale;
+        const top = (height - cropHeight * scale) / 2 - y * scale;
+        stage.style.backgroundSize = `${2736 * scale}px ${1795 * scale}px`;
+        stage.style.backgroundPosition = `${left}px ${top}px`;
+        map.style.left = `${left}px`;
+        map.style.top = `${top}px`;
+        map.style.transform = 'none';
+      }
     };
     syncMapViewport();
     if (stage && 'ResizeObserver' in window) new ResizeObserver(syncMapViewport).observe(stage);
@@ -374,9 +455,9 @@
 
     const pointsLayer = map.querySelector('.ltc-network-points');
     const regionMeta = Object.fromEntries(networkRegions.map((region) => [region.id, region]));
-    const pointData = Object.entries(networkRegionPoints).flatMap(([region, points]) =>
-      points.map(([x, y]) => ({ x: x / 19.2, y: y / 12.61, region }))
-    );
+    const pointData = networkCityPoints.map(({ city, x, y, region, compact }) => ({
+      city, x: x / 19.2, y: y / 12.61, region, compact
+    }));
     const pointNodes = pointData.map((point, index) => {
       const button = document.createElement('button');
       button.className = 'ltc-network-point';
@@ -385,7 +466,10 @@
       button.dataset.y = String(point.y);
       button.dataset.region = point.region;
       button.dataset.pointId = String(index + 1);
-      button.setAttribute('aria-label', `${regionMeta[point.region].label}服务站`);
+      button.dataset.city = point.city;
+      button.dataset.illustrative = 'true';
+      button.style.setProperty('--network-point-art-size', point.compact ? '22px' : '34px');
+      button.setAttribute('aria-label', `${point.city}城市分布示意点`);
       button.style.left = `${point.x}%`;
       button.style.top = `${point.y}%`;
       const visual = document.createElement('span');

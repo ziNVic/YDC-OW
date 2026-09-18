@@ -241,7 +241,7 @@
       .care-scene{background-attachment:scroll}
     }
   </style>
-  <link rel="stylesheet" href="ydc-common.css?v=20260918-map-coastal">
+  <link rel="stylesheet" href="ydc-common.css?v=20260918-network-banner-release">
   <style>
     /* 内页基础规范覆盖：保留 Figma 结构，仅统一导航、安全距离与字号层级 */
     :root{--content:var(--ydc-content)}
@@ -345,7 +345,7 @@
           <p class="kicker">易得康</p>
           <h2 class="heading">全国服务网络</h2>
         </div>
-        <div class="network-map-window ydc-network-stage">
+        <div class="network-map-window ydc-network-stage" data-network-crop="130 410 1500 850">
           <div class="ltc-network-map ydc-network-map" data-ydc-network-map aria-label="易得康全国服务网络地图"></div>
         </div>
       </div>
@@ -518,6 +518,6 @@
 
     document.querySelectorAll('a[href="#"]').forEach(link => link.addEventListener('click', event => event.preventDefault()));
   </script>
-  <script src="ydc-common.js?v=20260918-map-coastal"></script>
+  <script src="ydc-common.js?v=20260918-network-banner-release"></script>
 </body>
 </html>
