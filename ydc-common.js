@@ -136,6 +136,12 @@
           </section>
         </div>
       </nav>
+      <div class="ydc-footer-legal" aria-label="版权与合规信息">
+        <div class="ydc-footer-legal-row">
+          <div class="ydc-footer-legal-copy"><span>2026易得康医疗，版权所有。</span><span>本网站仅作集团信息展示，相关医疗服务由集团旗下持证机构提供。</span></div>
+          <div class="ydc-footer-legal-links" aria-label="网站政策"><span>隐私政策</span><span>法律声明</span><span>备案号</span></div>
+        </div>
+      </div>
     </footer>`;
 
   document.querySelectorAll('[data-ydc-header]').forEach((element) => {
